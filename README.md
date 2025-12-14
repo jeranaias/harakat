@@ -1124,11 +1124,13 @@ Harakat was evaluated on the held-out test set using standard metrics:
 
 #### Diacritic Error Rate (DER)
 
-The percentage of diacritics incorrectly predicted:
+The percentage of character positions with incorrect diacritization. Each Arabic letter that can carry a diacritic is evaluated as one position:
 
 ```
-DER = (Incorrect Diacritics) / (Total Diacritics) × 100%
+DER = (Positions with Wrong Diacritics) / (Total Diacritizable Positions) × 100%
 ```
+
+For example, in "كَتَبَ" (3 letters, each with a fatha), there are 3 positions. If one is wrong, DER = 33.3%.
 
 | System | DER |
 |--------|----:|
@@ -1141,25 +1143,27 @@ DER = (Incorrect Diacritics) / (Total Diacritics) × 100%
 
 #### Word Error Rate (WER)
 
-The percentage of words with at least one diacritic error:
+The percentage of words containing at least one diacritic error. A word is counted as wrong if any of its diacritics differ from the gold standard:
 
 ```
-WER = (Words with Errors) / (Total Words) × 100%
+WER = (Words with Any Diacritic Error) / (Total Words) × 100%
 ```
+
+For example, if "الْكِتَابُ" is predicted as "الْكِتَابِ" (one vowel wrong), the entire word counts as an error.
 
 | System | WER |
 |--------|----:|
-| Base Model (V10) | 24.3% |
-| Harakat (Full) | **14.22%** |
+| Base Model (V10) | 21.15% |
+| Harakat (Full) | **12.19%** |
 
-**Relative improvement**: 41.5% WER reduction
+**Relative improvement**: 42.4% WER reduction
 
 #### Detailed Metrics Table
 
 | Metric | Base Model | Harakat | Improvement |
 |--------|------------|---------|-------------|
 | DER | 9.06% | 4.46% | 50.8% |
-| WER | 24.3% | 14.22% | 41.5% |
+| WER | 21.15% | 12.19% | 42.4% |
 | Case DER | 18.7% | 11.2% | 40.1% |
 | Internal DER | 5.2% | 2.1% | 59.6% |
 | Shadda DER | 3.8% | 1.4% | 63.2% |
