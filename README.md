@@ -1040,7 +1040,7 @@ def build_lookup_tables(error_reports):
 
 #### Tiered Lookup Chain (in order)
 
-The Elite system applies lookups in a specific order, with earlier tiers taking precedence:
+The system applies lookups in a specific order, with earlier tiers taking precedence:
 
 | Tier | Entries | Confidence | Description |
 |------|--------:|------------|-------------|
@@ -1248,7 +1248,7 @@ The error-report system achieves remarkably consistent ~50% reduction across all
 | SUKOUN | 0.92% | 1.91% | ~436 MB | 2024 | SOTA, CAMeLBERT-based |
 | Shakkelha (Fadel) | 2.61% | 5.83% | ~31 MB | 2019 | BiLSTM |
 | Shakkala | 2.88% | 6.37% | ~29 MB | 2017 | BiLSTM |
-| **Harakat** | **4.46%** | **14.22%** | **3.14 MB** | 2024 | This work |
+| **Harakat** | **4.46%** | **12.19%** | **3.14 MB** | 2024 | This work |
 | Mishkal | 13.78% | — | ~37 MB | — | Rule-based |
 
 *Model sizes verified from public repositories. Systems without public releases (Farasa, MADAMIRA, PTCAD) omitted.*
@@ -1296,7 +1296,7 @@ Harakat is the fastest system while requiring only CPU.
 
 ```bash
 # Clone the repository
-git clone https://github.com/jmorgan/harakat.git
+git clone https://github.com/jeranaias/harakat.git
 cd harakat
 
 # Install dependencies
@@ -1312,7 +1312,7 @@ python harakat.py --test
 
 ```bash
 # Download the single-file distribution
-curl -O https://github.com/jmorgan/harakat/releases/latest/download/harakat.py
+curl -O https://github.com/jeranaias/harakat/releases/latest/download/harakat.py
 
 # Run directly
 python harakat.py "السلام عليكم"
@@ -1327,7 +1327,7 @@ pip install harakat
 #### Option 3: From Source
 
 ```bash
-git clone https://github.com/jmorgan/harakat.git
+git clone https://github.com/jeranaias/harakat.git
 cd harakat
 pip install -e .
 ```
@@ -1599,7 +1599,7 @@ print(f"DER: {metrics['der']:.2%}")
 print(f"WER: {metrics['wer']:.2%}")
 # Output:
 # DER: 4.46%
-# WER: 14.22%
+# WER: 12.19%
 ```
 
 ---
@@ -1854,7 +1854,7 @@ During development, we tested a **syntactic rules layer** for verb-subject agree
 - **Net impact**: -978 words (more harm than good)
 - **Problem**: Rules fired too aggressively without proper disambiguation
 
-**Decision**: Ship Elite-only, no syntactic layer. The error-report methodology works; hand-crafted rules on top do not.
+**Decision**: Ship error-correction only, no syntactic layer. The error-report methodology works; hand-crafted rules on top do not.
 
 ### Future Work Directions
 
@@ -2088,7 +2088,7 @@ Contributions are welcome! This project follows standard open-source practices.
 
 ```bash
 # Clone repository
-git clone https://github.com/jmorgan/harakat.git
+git clone https://github.com/jeranaias/harakat.git
 cd harakat
 
 # Create virtual environment
@@ -2136,7 +2136,7 @@ If you use Harakat in your research, please cite:
   author = {Morgan, Jesse},
   title = {Harakat: Error-Corrective Arabic Diacritization via Meta-Learning on Base Model Failures},
   year = {2024},
-  url = {https://github.com/jmorgan/harakat},
+  url = {https://github.com/jeranaias/harakat},
   note = {High-accuracy Arabic diacritization in 3.14 MB}
 }
 ```
@@ -2225,7 +2225,7 @@ The insight that drove Harakat came from years of teaching—watching students s
 
 ### Contact
 
-- GitHub: [@jmorgan](https://github.com/jmorgan)
+- GitHub: [@jeranaias](https://github.com/jeranaias)
 - Email: [contact via GitHub]
 
 ---
