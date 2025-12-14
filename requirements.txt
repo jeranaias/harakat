@@ -1,0 +1,6 @@
+# Harakat - Arabic Diacritization
+# No external dependencies required for core functionality
+# NumPy is optional (only needed for advanced features)
+
+# Optional dependencies:
+# numpy>=1.20.0  # For batch processing optimizations
