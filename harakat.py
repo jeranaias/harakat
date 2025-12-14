@@ -42,7 +42,7 @@ Usage:
     result = diacritize("كتب الطالب الدرس")
     print(result)  # كَتَبَ الطَّالِبُ الدَّرْسَ
 
-Repository: https://github.com/jmorgan/harakat
+Repository: https://github.com/jeranaias/harakat
 """
 
 from __future__ import annotations
