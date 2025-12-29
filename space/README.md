@@ -25,14 +25,20 @@ Paste any Arabic text and click Submit to add diacritical marks (tashkeel/haraka
 
 ## API
 
-POST to `/api/diacritize` with JSON body:
-```json
-{"text": "مرحبا بالعالم"}
-```
+Use Gradio's API format:
 
-Response:
-```json
-{"success": true, "input": "مرحبا بالعالم", "output": "مَرْحَبًا بِالْعَالَمِ"}
+```javascript
+// Step 1: Submit request
+const call = await fetch('https://jcmguy-harakat.hf.space/call/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: ['مرحبا بالعالم'] })
+});
+const { event_id } = await call.json();
+
+// Step 2: Get result
+const result = await fetch(`/call/predict/${event_id}`);
+// Returns: data: ["مَرْحَبًا بِالْعَالَمِ"]
 ```
 
 ## Links
