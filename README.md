@@ -1,10 +1,10 @@
 # Harakat
 
-**High-Accuracy Arabic Diacritization in 3.14 MB**
+**High-Accuracy Arabic Diacritization — 1.71% DER**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Size: 3.14 MB](https://img.shields.io/badge/size-3.14%20MB-green.svg)]()
+[![DER: 1.64%](https://img.shields.io/badge/DER-1.71%25-brightgreen.svg)]()
 
 ---
 
@@ -12,15 +12,23 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 
 **The core innovation**: Instead of building one perfect model, Harakat builds a system that *knows where it's wrong*—then trains specialized correctors on those exact failure patterns.
 
-| Metric | Harakat | SUKOUN (2024 SOTA) |
-|--------|---------|-------------------|
-| Diacritic Error Rate | 4.46% | 0.92% |
-| Model Size | 3.14 MB | ~436 MB |
-| Size Ratio | 1x | **139x larger** |
-| v10 Baseline | 9.06% | — |
-| Improvement over Base | **51% relative** | — |
+### Performance Summary (Test Set)
 
-Harakat cuts the base model's error rate **in half** while remaining **139x smaller** than SOTA.
+| Version | DER | DER (no case) | WER | WER (no case) | Size |
+|---------|-----|---------------|-----|---------------|------|
+| **V3.5 (current)** | **1.71%** | **1.18%** | **6.13%** | **4.07%** | ~6 MB |
+| V2 Neural | 2.29% | 1.95% | 6.44% | — | ~6 MB |
+| V1 Lookup | 4.46% | — | 12.19% | — | 3.14 MB |
+| SUKOUN (2024 SOTA) | 0.92% | — | — | — | ~436 MB |
+
+### Generalization (Validation Set)
+
+| Version | DER | DER (no case) | WER | WER (no case) |
+|---------|-----|---------------|-----|---------------|
+| **V3.5** | **2.27%** | **1.90%** | **7.20%** | **5.90%** |
+| V2 Neural | 3.11% | 3.32% | 7.79% | — |
+
+**V3.5 achieves 1.71% DER** — an 81% reduction from the base model (9.06%), within striking distance of SOTA while remaining **73x smaller**.
 
 ---
 
@@ -88,29 +96,83 @@ Harakat cuts the base model's error rate **in half** while remaining **139x smal
 
 ## Executive Summary
 
-Harakat introduces **error-report disambiguation**, a novel methodology where secondary correction systems are trained specifically on the errors of a primary model rather than on corpus statistics directly. This approach yields:
+Harakat V3.5 represents three generations of innovation in Arabic diacritization, achieving **1.71% DER** in just **6 MB**—making it **73x smaller than SOTA** while remaining highly accurate.
 
-- **50.8% relative DER reduction** from base model (9.06% → 4.46%)
-- **3.14 MB total size** (LZMA compressed)
-- **<5 hours training time** on CPU (no GPU required)
-- **2,550 words/second** inference speed
-- **Single-file deployment** with no external dependencies beyond NumPy
+### Key Achievements
 
-The key insight is that error patterns are more learnable than raw diacritization patterns. By explicitly modeling *where the base system fails*, we can build targeted correctors that achieve high precision on specific error categories without the parameter overhead of end-to-end neural approaches.
+| Metric | Value |
+|--------|-------|
+| **Diacritic Error Rate (DER)** | 1.71% (test), 2.27% (validation) |
+| **Word Error Rate (WER)** | 6.13% (test), 7.20% (validation) |
+| **Model Size** | 6 MB (single Python file) |
+| **vs. Base Model** | 81% DER reduction (9.06% → 1.71%) |
+| **vs. SUKOUN (SOTA)** | 73x smaller, competitive accuracy |
 
-### Traditional vs. Error-Report Training
+### The V3.5 Pipeline
 
 ```
-Traditional approach (Abbad & Xiong 2020):
-  corpus → frequency statistics → diacritization rules
-
-Harakat approach (NOVEL):
-  corpus → v10 predictions → ERROR REPORTS → correction rules
+Input Text → V2 Neural Pipeline → V3.5 Corrections → Output
+              │                    │
+         harakat_elite        Rule-based fixes
+         + Case Predictor     + ML homograph disambiguation
+         + Hybrid Corrector   + Voice correction
 ```
 
-The error reports capture **model-specific failure modes**, not just corpus statistics. This is why the methodology works: we're not trying to learn Arabic diacritization from scratch—we're learning to fix a specific model's specific mistakes.
+### What Makes Harakat Different
+
+1. **Error-Report Disambiguation**: Instead of learning diacritization from scratch, we learn to fix a model's specific mistakes
+2. **Layered Corrections**: Each version adds targeted fixes for remaining error categories
+3. **Single-File Deployment**: Everything embedded in one portable Python file
+4. **No Cloud Required**: Runs completely offline on any device
 
 ---
+
+## Version Evolution
+
+### V1: Error-Report Disambiguation (4.46% DER)
+
+The foundation. V1 introduced a novel methodology: train correction systems on the *errors* of a primary model, not on corpus statistics.
+
+- **Architecture**: Lexicon + Error reports + Confidence routing
+- **Key Innovation**: Triple-key lookup tables for context-aware correction
+- **Size**: 3.14 MB
+
+### V2: Neural Case Prediction (2.29% DER)
+
+V2 tackled the biggest remaining error category: grammatical case endings (i'rab).
+
+- **Architecture**: BiLSTM + Attention ensemble for case prediction
+- **Key Innovation**: 3-model ensemble with 97.4% case accuracy
+- **Improvement**: 49% DER reduction from V1
+- **Size**: ~6 MB
+
+### V3.5: ML-Based Corrections (1.71% DER)
+
+V3.5 adds machine learning classifiers for remaining hard cases.
+
+- **Homograph Disambiguation**: TF-IDF + LogisticRegression for context-aware word sense
+- **Voice Correction**: Active/passive verb form disambiguation
+- **Rule-Based Fixes**: Particle kasra, anna/sunna patterns
+- **Calibrated Thresholds**: Per-classifier confidence routing
+- **Improvement**: 25% DER reduction from V2
+- **Size**: 6 MB (everything embedded)
+
+### Cumulative Improvement
+
+```
+Base Model (harakat_elite):  9.06% DER
+     │ +Error Reports
+V1 (Lookup tables):          4.46% DER  (-51%)
+     │ +Neural Case
+V2 (BiLSTM ensemble):        2.29% DER  (-49%)
+     │ +ML Classifiers
+V3.5 (Current):              1.71% DER  (-25%)
+                             ═══════════
+                             81% total reduction
+```
+
+---
+
 
 ## The Story
 
@@ -1288,68 +1350,92 @@ Harakat is the fastest system while requiring only CPU.
 ### System Requirements
 
 - **Python**: 3.8 or higher
-- **Memory**: 50 MB minimum (runtime footprint)
-- **Disk**: 4 MB for model file
-- **Dependencies**: NumPy only
+- **Memory**: ~100 MB runtime footprint
+- **Disk**: 6 MB (single-file distribution)
+- **Dependencies**: PyTorch, NumPy, scikit-learn
 
-### Quick Start
+### Quick Start (30 seconds)
 
 ```bash
-# Clone the repository
+# Clone and install
 git clone https://github.com/jeranaias/harakat.git
 cd harakat
+pip install -r requirements.txt
 
-# Install dependencies
-pip install numpy
-
-# Verify installation
-python harakat.py --test
+# Test it works
+python harakat.py "مرحبا بالعالم"
+# Output: مَرْحَبًا بِالْعَالَمِ
 ```
 
 ### Installation Options
 
-#### Option 1: Direct Download (Recommended)
-
-```bash
-# Download the single-file distribution
-curl -O https://github.com/jeranaias/harakat/releases/latest/download/harakat.py
-
-# Run directly
-python harakat.py "السلام عليكم"
-```
-
-#### Option 2: pip Install
-
-```bash
-pip install harakat
-```
-
-#### Option 3: From Source
+#### Option 1: From Source (Recommended)
 
 ```bash
 git clone https://github.com/jeranaias/harakat.git
 cd harakat
-pip install -e .
+pip install -r requirements.txt
+
+# Verify
+python harakat.py --version
+# Output: Harakat 3.5.0
+```
+
+#### Option 2: Single-File Download
+
+The entire V3.5 system is embedded in a single 6 MB Python file:
+
+```bash
+# Download harakat.py from releases
+curl -O https://github.com/jeranaias/harakat/releases/latest/download/harakat.py
+
+# Install dependencies
+pip install torch numpy scikit-learn
+
+# Run
+python harakat.py "الكتاب على الطاولة"
+```
+
+#### Option 3: pip Install (Coming Soon)
+
+```bash
+pip install harakat  # Not yet available on PyPI
 ```
 
 ### Verifying Installation
 
 ```bash
-# Run self-test
-python harakat.py --test
+# Check version
+python harakat.py --version
+# Output: Harakat 3.5.0
 
-# Expected output:
-# Harakat v1.0
-# Self-test: PASSED
-# - Lexicon: 60,247 entries loaded
-# - Error reports: 891,234 patterns loaded
-# - Blacklist: 683 entries loaded
-# - Test diacritization: OK
+# Quick test
+python harakat.py "ذهب الولد إلى المدرسة"
+# Output: ذَهَبَ الْوَلَدُ إِلَى الْمَدْرَسَةِ
+
+# Python API test
+python -c "from harakat import diacritize; print(diacritize('مرحبا'))"
+# Output: مَرْحَبًا
 ```
 
 ---
 
 ## Usage
+
+### Quick Start
+
+```python
+# Python API
+from harakat import diacritize
+print(diacritize("مرحبا بالعالم"))
+# مَرْحَبًا بِالْعَالَمِ
+```
+
+```bash
+# Command line
+python harakat.py "السلام عليكم"
+# السَّلَامُ عَلَيْكُمْ
+```
 
 ### Command Line Interface
 
@@ -1363,57 +1449,54 @@ python harakat.py "الكتاب على الطاولة"
 # Diacritize from file
 python harakat.py -f input.txt -o output.txt
 
-# Read from stdin
+# Read from stdin (pipe or redirect)
 echo "مرحبا بالعالم" | python harakat.py --stdin
 # Output: مَرْحَبًا بِالْعَالَمِ
+
+cat arabic_text.txt | python harakat.py --stdin > diacritized.txt
 ```
 
-#### Advanced Options
+#### Options
 
 ```bash
-# JSON output with confidence scores
-python harakat.py "النص العربي" --json
-# Output:
-# {
-#   "input": "النص العربي",
-#   "output": "النَّصُّ الْعَرَبِيُّ",
-#   "words": [
-#     {"word": "النص", "diacritized": "النَّصُّ", "confidence": 0.94},
-#     {"word": "العربي", "diacritized": "الْعَرَبِيُّ", "confidence": 0.97}
-#   ],
-#   "overall_confidence": 0.955
-# }
+python harakat.py --help
 
-# Custom confidence threshold (default: 0.70)
-python harakat.py "النص العربي" --threshold 0.85
+Options:
+  text                  Text to diacritize (positional argument)
+  -f, --file FILE       Read input from file
+  -o, --output FILE     Write output to file
+  --stdin               Read from standard input
+  --v2-only             Use V2 pipeline only (skip V3.5 corrections)
+  --version             Show version number
+  -h, --help            Show help message
+```
 
-# Verbose mode (show correction decisions)
-python harakat.py "النص العربي" --verbose
+#### Examples
 
-# Preserve existing diacritics
-python harakat.py "الكِتاب" --preserve-existing
+```bash
+# Simple text
+python harakat.py "ذهب الولد إلى المدرسة"
 
-# Strip all diacritics (preprocessing)
-python harakat.py "الْكِتَابُ" --strip
+# Process a file
+python harakat.py -f book.txt -o book_diacritized.txt
 
-# Benchmark mode
-python harakat.py -f large_corpus.txt --benchmark
+# Pipeline processing
+cat corpus/*.txt | python harakat.py --stdin > all_diacritized.txt
+
+# V2 only (faster, slightly less accurate)
+python harakat.py --v2-only "النص العربي"
 ```
 
 #### File Processing
 
 ```bash
-# Process single file
+# Single file
 python harakat.py -f input.txt -o output.txt
 
-# Process multiple files
-python harakat.py -f file1.txt file2.txt file3.txt -o output_dir/
-
-# Recursive directory processing
-python harakat.py -r input_dir/ -o output_dir/
-
-# Process with specific encoding
-python harakat.py -f input.txt -o output.txt --encoding utf-8
+# Batch processing (shell loop)
+for f in *.txt; do
+    python harakat.py -f "$f" -o "diacritized_$f"
+done
 ```
 
 ### Python API
@@ -1868,72 +1951,105 @@ During development, we tested a **syntactic rules layer** for verb-subject agree
 
 ## Roadmap
 
-### Harakat V2 (In Development)
+### Harakat V2 (Released)
 
-The next major version targets significant improvements in case ending prediction:
+V2 introduced a complete neural architecture overhaul:
 
 #### Neural Case Predictor V3
 
-A 3-model ensemble with self-attention:
+A 3-model BiLSTM+Attention ensemble for grammatical case endings:
 
 ```
 Architecture:
-├── Embedding layer: 64 dimensions
-├── Bidirectional context: ±4 words
-├── Self-attention: 4 heads
-├── Feedforward: 128 → 64 → num_cases
-└── Ensemble voting: 3 models
+├── Embedding layer: 48 dimensions
+├── BiLSTM layers: 64 hidden units
+├── Self-attention mechanism
+├── Context window: ±4 words
+└── Ensemble voting: 3 models (97.4% accuracy)
 ```
 
-Preliminary results on validation set:
+| Metric | V1 | V2 (Achieved) |
+|--------|---:|-------------:|
+| Case accuracy | 88.8% | **97.4%** |
+| Overall DER | 4.46% | **2.29%** |
+| Model size | 3.14 MB | ~6 MB |
 
-| Metric | V1 (Current) | V2 (Planned) |
-|--------|-------------:|-------------:|
-| Case accuracy | 88.8% | ~97.8% |
-| Case DER | 2.80% | ~0.6% |
-| Model size | - | +1 MB |
+#### Hybrid Correction System
 
-#### Enhanced Internal Vowel Model
+The V2 pipeline combines neural and rule-based components:
 
-Improved prediction for fatha/kasra/damma using morphological features:
+1. **harakat_elite**: Character-level transformer base model
+2. **Case predictor ensemble**: BiLSTM+Attention for grammatical endings
+3. **Hybrid corrector**: Confidence-weighted interpolation
 
-| Metric | V1 | V2 |
-|--------|---:|---:|
-| Internal vowel DER | 0.82% | ~0.4% |
-| Pattern coverage | 87% | 95% |
+### Harakat V3.5 (Current - Released)
 
-#### Estimated V2 Impact
+V3.5 adds ML-based correction layers on top of V2:
 
-| Metric | V1 | V2 (Target) |
-|--------|---:|------------:|
-| Overall DER | 4.46% | ~2% |
-| Case DER | 2.80% | ~0.6% |
-| Total size | 3.14 MB | ~10 MB |
-| vs Shakkala/Shakkelha | 10x smaller, 1.6% worse | 3x smaller, **better accuracy** |
-| vs SUKOUN | 139x smaller | 44x smaller |
+#### ML Homograph Disambiguation
 
-**V2 positioning**: At ~10 MB and ~2% DER, Harakat V2 would be **3x smaller than Shakkala/Shakkelha with better accuracy**—the best accuracy-to-size ratio in the field.
+Scikit-learn classifiers trained on contextual features to disambiguate homographs:
+
+- **Feature extraction**: TF-IDF on surrounding context windows
+- **Calibrated thresholds**: Per-word confidence routing
+- **Coverage**: 50+ high-frequency homograph patterns
+
+#### Voice Correction
+
+Active/passive verb form disambiguation using:
+
+- Morphological pattern matching
+- Context-aware ML classifiers
+- Rule-based particle correction
+
+#### Rule-Based Fixes
+
+Grammar-based corrections for specific patterns:
+
+- **Particle kasra rules**: Preposition case assignment
+- **Anna fix**: أنّ/أن shadda disambiguation
+- **Sunna fix**: سُنَّة/سَنَة pattern correction
+
+#### V3.5 Results
+
+| Metric | V2 | V3.5 (Achieved) |
+|--------|---:|---------------:|
+| DER (test) | 2.29% | **1.71%** |
+| DER (no case) | 1.95% | **1.18%** |
+| WER (test) | 6.44% | **6.13%** |
+| Total size | ~6 MB | ~6 MB |
+| DER reduction | — | **25% from V2** |
+
+**V3.5 positioning**: At ~6 MB and 1.71% DER, Harakat V3.5 is **73x smaller than SUKOUN** while achieving competitive accuracy.
 
 ### Future Directions
 
-#### Short-term (V2.x)
+#### Completed (V2/V3.5)
 
-- [ ] Neural case predictor deployment
+- [x] Neural case predictor deployment
+- [x] ML homograph disambiguation
+- [x] Voice correction (active/passive)
+- [x] Calibrated confidence thresholds
+
+#### Short-term (V4)
+
 - [ ] Improved shadda detection
 - [ ] Better OOV handling
+- [ ] GRU variants for broader GPU compatibility
 
-#### Medium-term (V3)
+#### Medium-term
 
 - [ ] Dialect-aware diacritization (Egyptian, Levantine, Gulf)
 - [ ] Integration with speech synthesis (TTS)
 - [ ] Browser-based deployment (WebAssembly)
 
-#### Long-term (V4+)
+#### Long-term
 
 - [ ] Mobile SDKs (iOS, Android)
 - [ ] Real-time typing assistance
 - [ ] Educational mode with explanations
 - [ ] Integration with Arabic NLP pipelines
+
 
 ---
 

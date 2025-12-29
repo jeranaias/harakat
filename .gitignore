@@ -85,3 +85,19 @@ Thumbs.db
 *.tmp
 training_data/
 corpus/
+
+# V3 training data (large, can be regenerated from scripts)
+harakat_v3/training/homograph_data/
+harakat_v3/training/voice_data/
+
+# V2 archive (intermediate build files)
+harakat_v2/archive/dist/
+harakat_v2/archive/models/
+harakat_v2/archive/distributions/
+
+# Build artifacts
+harakat_v35_embedded.py
+update_*.py
+*.egg-info/
+dist/
+build/
