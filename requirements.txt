@@ -1,6 +1,10 @@
-# Harakat - Arabic Diacritization
-# No external dependencies required for core functionality
-# NumPy is optional (only needed for advanced features)
+# Harakat V3.5 - Arabic Diacritization
+# Required dependencies
 
-# Optional dependencies:
-# numpy>=1.20.0  # For batch processing optimizations
+torch>=2.0.0              # Neural network backend for case prediction
+numpy>=1.20.0             # Numerical operations
+scikit-learn>=1.0.0       # ML classifiers for homograph disambiguation
+
+# Optional dependencies (for development/evaluation)
+# tqdm>=4.60.0            # Progress bars for batch processing
+# matplotlib>=3.5.0       # Visualization for error analysis
