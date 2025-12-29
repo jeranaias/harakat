@@ -6,6 +6,8 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![DER: 1.64%](https://img.shields.io/badge/DER-1.71%25-brightgreen.svg)]()
 
+> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** — See Harakat in action with our interactive bilingual showcase (English/Arabic).
+
 ---
 
 Harakat is a lightweight, offline-capable Arabic diacritization engine that achieves state-of-the-art accuracy while remaining small enough to run on any device. Built from scratch by a single developer, it demonstrates that careful engineering and novel methodologies can compete with billion-parameter models at a fraction of the size.
