@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harakat - Arabic Diacritization | حَرَكَات - التشكيل العربي</title>
-    <meta name="description" content="High-accuracy Arabic diacritization achieving 1.71% DER in just 6MB. Open source, offline-capable, 73x smaller than SOTA.">
-    <meta name="keywords" content="Arabic, diacritization, tashkeel, harakat, NLP, machine learning, neural network">
+    <meta name="description" content="High-accuracy Arabic diacritization achieving 1.71% DER. Try it live - paste any Arabic text and see instant results.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0ea5e9;
@@ -16,49 +15,33 @@
             --primary-light: #38bdf8;
             --secondary: #10b981;
             --accent: #f59e0b;
-            --accent-pink: #ec4899;
             --dark: #0f172a;
             --dark-soft: #1e293b;
             --light: #f8fafc;
             --gray: #64748b;
             --gray-light: #94a3b8;
             --border: #e2e8f0;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
             --glass: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             line-height: 1.7;
             color: var(--dark);
             background: var(--light);
-            overflow-x: hidden;
         }
 
         body.rtl {
             direction: rtl;
-            font-family: 'Tajawal', 'Noto Naskh Arabic', sans-serif;
+            font-family: 'Tajawal', sans-serif;
         }
 
-        .arabic-text {
-            font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
         /* Language Toggle */
         .lang-toggle {
@@ -75,10 +58,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        body.rtl .lang-toggle {
-            right: auto;
-            left: 20px;
-        }
+        body.rtl .lang-toggle { right: auto; left: 20px; }
 
         .lang-btn {
             padding: 10px 20px;
@@ -89,77 +69,31 @@
             font-weight: 600;
             cursor: pointer;
             border-radius: 50px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .lang-btn.active {
-            background: white;
-            color: var(--dark);
-        }
+        .lang-btn.active { background: white; color: var(--dark); }
 
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             background: var(--gradient-hero);
-            position: relative;
             display: flex;
             align-items: center;
+            position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .hero-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
-            25% { transform: translateY(-100px) translateX(50px); opacity: 0.3; }
-            50% { transform: translateY(-50px) translateX(-30px); opacity: 0.8; }
-            75% { transform: translateY(-150px) translateX(20px); opacity: 0.4; }
         }
 
         .hero-content {
             position: relative;
             z-index: 10;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            padding: 120px 0;
+            padding: 100px 0;
+            width: 100%;
         }
 
-        .hero-text {
-            color: white;
+        .hero-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
 
         .hero-badge {
@@ -167,14 +101,12 @@
             align-items: center;
             gap: 8px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             padding: 8px 16px;
             border-radius: 50px;
             font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 24px;
             color: var(--primary-light);
+            margin-bottom: 24px;
         }
 
         .hero-badge .dot {
@@ -186,139 +118,68 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .hero h1 {
-            font-size: 64px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        body.rtl .hero h1 {
-            font-family: 'Tajawal', sans-serif;
             font-size: 56px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
         }
 
         .hero h1 .highlight {
             background: var(--gradient-3);
             -webkit-background-clip: text;
-            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
             font-size: 20px;
             color: var(--gray-light);
-            margin-bottom: 40px;
-            max-width: 500px;
-        }
-
-        body.rtl .hero-subtitle {
-            font-size: 22px;
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
 
         .hero-stats {
             display: flex;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        body.rtl .hero-stats {
-            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
         }
 
         .stat-card {
             text-align: center;
-            padding: 24px 32px;
+            padding: 20px 30px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .stat-value {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 800;
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--gray-light);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 4px;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-        }
-
-        body.rtl .hero-buttons {
-            flex-direction: row-reverse;
-        }
-
-        .btn {
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--gradient-3);
-            color: var(--dark);
-            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.6);
-        }
-
-        .btn-secondary {
+        /* Main Demo */
+        .demo-section {
             background: var(--glass);
-            color: white;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Demo Card */
-        .demo-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .demo-header {
@@ -326,7 +187,7 @@
             padding: 16px 24px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            justify-content: space-between;
             border-bottom: 1px solid var(--glass-border);
         }
 
@@ -345,80 +206,141 @@
         .demo-dot.yellow { background: #f59e0b; }
         .demo-dot.green { background: #10b981; }
 
-        .demo-title {
+        .demo-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: var(--gray-light);
-            font-size: 14px;
-            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
         }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .status-indicator.ready { background: var(--secondary); }
+        .status-indicator.loading { background: var(--accent); animation: pulse 1s infinite; }
+        .status-indicator.error { background: #ef4444; }
 
         .demo-body {
             padding: 32px;
         }
 
-        .demo-label {
+        .demo-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .demo-col h3 {
             color: var(--gray-light);
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .demo-input, .demo-output {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 22px;
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            text-align: right;
+            line-height: 2;
+            resize: vertical;
         }
 
         .demo-input {
-            width: 100%;
-            padding: 20px;
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            font-size: 24px;
-            font-family: 'Amiri', 'Noto Naskh Arabic', serif;
             color: white;
-            direction: rtl;
-            text-align: right;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
         }
 
         .demo-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
         }
 
-        .demo-input::placeholder {
-            color: var(--gray);
-        }
-
-        .demo-arrow {
-            text-align: center;
-            color: var(--primary-light);
-            font-size: 24px;
-            margin: 16px 0;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-        }
+        .demo-input::placeholder { color: var(--gray); }
 
         .demo-output {
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 28px;
-            font-family: 'Amiri', 'Noto Naskh Arabic', serif;
             color: var(--secondary);
-            direction: rtl;
-            text-align: right;
-            min-height: 80px;
-            font-weight: 700;
+            font-weight: 600;
+        }
+
+        .demo-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-3);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .demo-examples {
             margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .demo-examples h4 {
+            color: var(--gray-light);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .example-chips {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 8px;
         }
 
@@ -431,7 +353,7 @@
             font-size: 14px;
             font-family: 'Amiri', serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             direction: rtl;
         }
 
@@ -441,691 +363,358 @@
             color: white;
         }
 
-        /* Section Styles */
+        /* Sections */
         section {
-            padding: 120px 0;
+            padding: 100px 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .section-badge {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 6px 16px;
             background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid rgba(14, 165, 233, 0.2);
             border-radius: 50px;
             color: var(--primary);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 16px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 16px;
         }
 
         .section-header h2 {
-            font-size: 48px;
+            font-size: 40px;
             font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        body.rtl .section-header h2 {
-            font-family: 'Tajawal', sans-serif;
+            margin-bottom: 16px;
         }
 
         .section-header p {
-            font-size: 20px;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Features Section */
-        .features {
-            background: white;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .feature-card {
-            padding: 40px;
-            background: var(--light);
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-3);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 72px;
-            height: 72px;
-            background: var(--gradient-3);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
-        }
-
-        .feature-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--gray);
-            font-size: 16px;
-            line-height: 1.7;
-        }
-
-        /* Architecture Section */
-        .architecture {
-            background: var(--dark);
-            color: white;
-            position: relative;
-        }
-
-        .architecture .section-header h2 {
-            color: white;
-        }
-
-        .architecture .section-header p {
-            color: var(--gray-light);
-        }
-
-        .architecture .section-badge {
-            background: rgba(79, 172, 254, 0.2);
-            border-color: rgba(79, 172, 254, 0.3);
-        }
-
-        .pipeline {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .pipeline-stage {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 32px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 24px;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        body.rtl .pipeline-stage {
-            direction: rtl;
-        }
-
-        .pipeline-stage:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .stage-number {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--dark);
-        }
-
-        .stage-content h4 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .stage-content p {
-            color: var(--gray-light);
-            font-size: 15px;
-        }
-
-        .stage-badge {
-            padding: 6px 14px;
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 20px;
-            color: var(--secondary);
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .pipeline-connector {
-            text-align: center;
-            color: var(--primary-light);
-            font-size: 24px;
-        }
-
-        /* Comparison Section */
-        .comparison {
-            background: linear-gradient(180deg, var(--light) 0%, white 100%);
-        }
-
-        .comparison-table-wrapper {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .comparison-table th {
-            background: var(--dark);
-            color: white;
-            padding: 24px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        body.rtl .comparison-table th {
-            text-align: right;
-        }
-
-        .comparison-table td {
-            padding: 24px;
-            border-bottom: 1px solid var(--border);
-            font-size: 16px;
-        }
-
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .comparison-table tr.highlight {
-            background: linear-gradient(90deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
-        }
-
-        .comparison-table tr.highlight td {
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        .table-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--gradient-3);
-            color: var(--dark);
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-
-        body.rtl .table-badge {
-            margin-left: 0;
-            margin-right: 8px;
-        }
-
-        .check-icon {
-            color: var(--secondary);
-            font-size: 20px;
-        }
-
-        /* Use Cases */
-        .use-cases {
-            background: var(--gradient-hero);
-            color: white;
-        }
-
-        .use-cases .section-header h2 {
-            color: white;
-        }
-
-        .use-cases .section-header p {
-            color: var(--gray-light);
-        }
-
-        .use-cases .section-badge {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .use-cases-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .use-case-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 32px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .use-case-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .use-case-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .use-case-card h4 {
             font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .use-case-card p {
-            color: var(--gray-light);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Installation */
-        .installation {
+        /* Use Case Showcases */
+        .showcase {
             background: white;
         }
 
-        .install-grid {
+        .showcase-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 32px;
         }
 
-        .install-card {
+        .showcase-card {
             background: var(--light);
             border: 1px solid var(--border);
             border-radius: 20px;
             overflow: hidden;
+            transition: all 0.3s;
         }
 
-        .install-header {
-            background: var(--dark);
-            color: white;
-            padding: 20px 28px;
+        .showcase-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .showcase-card-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
-        .install-header h3 {
+        .showcase-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-3);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .showcase-card-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .showcase-card-header p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .showcase-card-body {
+            padding: 24px;
+        }
+
+        .showcase-demo {
+            background: var(--dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .showcase-demo-header {
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .showcase-demo-title {
+            color: var(--gray-light);
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .showcase-demo-btn {
+            padding: 6px 12px;
+            background: var(--primary);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .showcase-demo-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .showcase-demo-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .showcase-demo-content {
+            padding: 20px;
+        }
+
+        .showcase-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            color: white;
             font-size: 18px;
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            text-align: right;
+            line-height: 1.8;
+            resize: none;
+            margin-bottom: 12px;
+        }
+
+        .showcase-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .showcase-arrow {
+            text-align: center;
+            color: var(--gray);
+            padding: 8px;
+        }
+
+        .showcase-output {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            color: var(--secondary);
+            font-size: 18px;
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            text-align: right;
+            line-height: 1.8;
+            min-height: 60px;
             font-weight: 600;
         }
 
-        .install-body {
-            padding: 28px;
+        .showcase-output.loading {
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        /* Code Integration Section */
+        .integration {
+            background: var(--dark);
+            color: white;
+        }
+
+        .integration .section-header h2 { color: white; }
+        .integration .section-header p { color: var(--gray-light); }
+        .integration .section-badge {
+            background: rgba(79, 172, 254, 0.2);
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .code-tab {
+            padding: 10px 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--gray-light);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .code-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
         .code-block {
-            background: var(--dark);
-            border-radius: 12px;
-            padding: 24px;
-            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
-            font-size: 14px;
-            overflow-x: auto;
-            color: #e2e8f0;
-            line-height: 1.8;
-        }
-
-        .code-block .comment { color: #64748b; }
-        .code-block .keyword { color: var(--primary-light); }
-        .code-block .string { color: var(--secondary); }
-        .code-block .function { color: #fbbf24; }
-
-        /* Version Timeline */
-        .timeline {
-            background: var(--light);
-        }
-
-        .timeline-container {
-            position: relative;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: var(--gradient-3);
-            border-radius: 2px;
-        }
-
-        body.rtl .timeline-container::before {
-            left: auto;
-            right: 50%;
-            transform: translateX(50%);
-        }
-
-        .timeline-item {
+        .code-block-header {
+            padding: 16px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--glass-border);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 48px;
         }
 
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
+        .code-block-title {
+            color: var(--gray-light);
+            font-size: 13px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        body.rtl .timeline-item:nth-child(odd) {
-            flex-direction: row;
+        .code-block-copy {
+            padding: 6px 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        body.rtl .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            width: 45%;
-            background: white;
-            padding: 28px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
-        }
-
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
+        .code-block-copy:hover {
             background: var(--primary);
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 0 0 4px var(--primary-light);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
-        body.rtl .timeline-dot {
-            left: auto;
-            right: 50%;
-            transform: translateX(50%);
+        .code-block pre {
+            padding: 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #e2e8f0;
         }
 
-        .timeline-version {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .timeline-der {
-            font-size: 32px;
-            font-weight: 700;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
-        }
-
-        .timeline-desc {
-            color: var(--gray);
-            font-size: 15px;
-        }
+        .code-block .comment { color: #64748b; }
+        .code-block .keyword { color: #38bdf8; }
+        .code-block .string { color: #10b981; }
+        .code-block .function { color: #fbbf24; }
 
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 80px 0 40px;
+            padding: 60px 0 30px;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        body.rtl .footer-grid {
-            direction: rtl;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .footer-brand h3 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            margin-bottom: 16px;
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 8px;
         }
 
         .footer-brand p {
             color: var(--gray-light);
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .footer-links h4 {
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray-light);
-            margin-bottom: 24px;
         }
 
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 14px;
+        .footer-links {
+            display: flex;
+            gap: 32px;
         }
 
         .footer-links a {
-            color: white;
+            color: var(--gray-light);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             transition: color 0.2s;
         }
 
-        .footer-links a:hover {
-            color: var(--primary-light);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--dark-soft);
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        body.rtl .footer-bottom {
-            flex-direction: row-reverse;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .social-links a {
-            width: 44px;
-            height: 44px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
+        .footer-links a:hover { color: white; }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero-subtitle {
-                margin: 0 auto 40px;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .use-cases-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 40px; }
+            .demo-row { grid-template-columns: 1fr; }
+            .showcase-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-wrap: wrap; }
+            .footer-content { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .section-header h2 {
-                font-size: 32px;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .features-grid,
-            .install-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .use-cases-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pipeline-stage {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .timeline-container::before {
-                left: 20px;
-            }
-
-            .timeline-item,
-            .timeline-item:nth-child(odd) {
-                flex-direction: column;
-            }
-
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px;
-            }
-
-            .timeline-dot {
-                left: 20px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-        }
-
-        /* Hidden by language */
+        /* Language visibility */
         .en { display: block; }
         .ar { display: none; }
-
         body.rtl .en { display: none; }
         body.rtl .ar { display: block; }
-
         .en-inline { display: inline; }
         .ar-inline { display: none; }
-
         body.rtl .en-inline { display: none; }
         body.rtl .ar-inline { display: inline; }
+
+        /* Loading spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1135,32 +724,20 @@
         <button class="lang-btn" onclick="setLanguage('ar')">العربية</button>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero with Main Demo -->
     <section class="hero">
-        <div class="hero-particles">
-            <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; top: 80%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 30%; top: 40%; animation-delay: 4s;"></div>
-            <div class="particle" style="left: 50%; top: 60%; animation-delay: 1s;"></div>
-            <div class="particle" style="left: 70%; top: 30%; animation-delay: 3s;"></div>
-            <div class="particle" style="left: 80%; top: 70%; animation-delay: 5s;"></div>
-            <div class="particle" style="left: 90%; top: 50%; animation-delay: 2.5s;"></div>
-        </div>
-
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-header">
                     <div class="hero-badge">
                         <span class="dot"></span>
-                        <span class="en-inline">Version 3.5 Released</span>
-                        <span class="ar-inline">الإصدار 3.5 متاح الآن</span>
+                        <span class="en-inline">Live Diacritization Engine</span>
+                        <span class="ar-inline">محرك التشكيل المباشر</span>
                     </div>
-
-                    <h1 class="en">Arabic Diacritization<br><span class="highlight">Made Simple</span></h1>
-                    <h1 class="ar">التشكيل العربي<br><span class="highlight">بِكُلِّ سُهُولَةٍ</span></h1>
-
-                    <p class="hero-subtitle en">Transform unvoweled Arabic text into fully diacritized form with state-of-the-art accuracy. Lightweight, offline-capable, and open source.</p>
-                    <p class="hero-subtitle ar">حَوِّل النص العربي غير المشكول إلى نص مشكول بالكامل بدقة عالية. خفيف الحجم، يعمل بدون إنترنت، ومفتوح المصدر.</p>
+                    <h1 class="en">Arabic Diacritization <span class="highlight">That Actually Works</span></h1>
+                    <h1 class="ar">التشكيل العربي <span class="highlight">الذي يعمل فعلاً</span></h1>
+                    <p class="hero-subtitle en">Paste any Arabic text below. No limits, no signup, no fake demos. Real neural network diacritization running live.</p>
+                    <p class="hero-subtitle ar">الصق أي نص عربي أدناه. بدون قيود، بدون تسجيل، بدون عروض وهمية. تشكيل حقيقي بالشبكات العصبية يعمل مباشرة.</p>
 
                     <div class="hero-stats">
                         <div class="stat-card">
@@ -1170,56 +747,67 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">6 MB</div>
-                            <div class="stat-label en">Total Size</div>
-                            <div class="stat-label ar">الحجم الكلي</div>
+                            <div class="stat-label en">Model Size</div>
+                            <div class="stat-label ar">حجم النموذج</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-value">73x</div>
-                            <div class="stat-label en">Smaller</div>
-                            <div class="stat-label ar">أصغر</div>
+                            <div class="stat-label en">Smaller than SOTA</div>
+                            <div class="stat-label ar">أصغر من أفضل النماذج</div>
                         </div>
-                    </div>
-
-                    <div class="hero-buttons">
-                        <a href="https://github.com/jeranaias/harakat" class="btn btn-primary" target="_blank">
-                            <span class="en-inline">Get Started</span>
-                            <span class="ar-inline">ابدأ الآن</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                        <a href="#demo" class="btn btn-secondary">
-                            <span class="en-inline">Try Demo</span>
-                            <span class="ar-inline">جرب التشكيل</span>
-                        </a>
                     </div>
                 </div>
 
-                <div class="demo-card" id="demo">
+                <!-- Main Demo -->
+                <div class="demo-section">
                     <div class="demo-header">
                         <div class="demo-dots">
                             <div class="demo-dot red"></div>
                             <div class="demo-dot yellow"></div>
                             <div class="demo-dot green"></div>
                         </div>
-                        <div class="demo-title">harakat.py</div>
+                        <div class="demo-status">
+                            <span class="status-indicator" id="status-indicator"></span>
+                            <span id="status-text">Initializing...</span>
+                        </div>
                     </div>
                     <div class="demo-body">
-                        <div class="demo-label en">Input (Unvoweled)</div>
-                        <div class="demo-label ar">النص المدخل (بدون تشكيل)</div>
-                        <input type="text" class="demo-input" id="demo-input"
-                               placeholder="اكتب نصاً عربياً هنا..."
-                               value="ذهب الولد إلى المدرسة">
-
-                        <div class="demo-arrow">&#8595;</div>
-
-                        <div class="demo-label en">Output (Diacritized)</div>
-                        <div class="demo-label ar">النتيجة (مُشَكَّل)</div>
-                        <div class="demo-output" id="demo-output">ذَهَبَ الْوَلَدُ إِلَى الْمَدْرَسَةِ</div>
-
+                        <div class="demo-row">
+                            <div class="demo-col">
+                                <h3 class="en">Input (Undiacritized)</h3>
+                                <h3 class="ar">المدخل (بدون تشكيل)</h3>
+                                <textarea class="demo-input" id="main-input" placeholder="الصق أو اكتب نصاً عربياً هنا...">ان الذين امنوا وعملوا الصالحات كانت لهم جنات الفردوس نزلا</textarea>
+                            </div>
+                            <div class="demo-col">
+                                <h3 class="en">Output (Diacritized)</h3>
+                                <h3 class="ar">المخرج (مُشَكَّل)</h3>
+                                <div class="demo-output" id="main-output"></div>
+                            </div>
+                        </div>
+                        <div class="demo-actions">
+                            <button class="btn btn-primary" id="diacritize-btn" onclick="diacritizeMain()">
+                                <span class="en-inline">Diacritize</span>
+                                <span class="ar-inline">شَكِّل</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearMain()">
+                                <span class="en-inline">Clear</span>
+                                <span class="ar-inline">مسح</span>
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyOutput()">
+                                <span class="en-inline">Copy Result</span>
+                                <span class="ar-inline">نسخ النتيجة</span>
+                            </button>
+                        </div>
                         <div class="demo-examples">
-                            <span class="example-chip" onclick="setExample('السلام عليكم')">السلام عليكم</span>
-                            <span class="example-chip" onclick="setExample('الحمد لله رب العالمين')">الحمد لله رب العالمين</span>
-                            <span class="example-chip" onclick="setExample('العلم نور')">العلم نور</span>
-                            <span class="example-chip" onclick="setExample('من طلب العلا سهر الليالي')">من طلب العلا سهر الليالي</span>
+                            <h4 class="en">Try These Examples</h4>
+                            <h4 class="ar">جرب هذه الأمثلة</h4>
+                            <div class="example-chips">
+                                <span class="example-chip" onclick="setExample('بسم الله الرحمن الرحيم')">بسم الله الرحمن الرحيم</span>
+                                <span class="example-chip" onclick="setExample('العلم نور والجهل ظلام')">العلم نور والجهل ظلام</span>
+                                <span class="example-chip" onclick="setExample('من جد وجد ومن زرع حصد')">من جد وجد ومن زرع حصد</span>
+                                <span class="example-chip" onclick="setExample('ذهب الطالب الى المدرسة ليتعلم العلوم المفيدة')">ذهب الطالب الى المدرسة</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1227,391 +815,195 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
+    <!-- Use Case Showcases -->
+    <section class="showcase" id="showcase">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge en">Features</div>
-                <div class="section-badge ar">المميزات</div>
-                <h2 class="en">Why Choose Harakat?</h2>
-                <h2 class="ar">لماذا حَرَكَات؟</h2>
-                <p class="en">Three generations of neural network innovation combined with targeted ML corrections deliver exceptional accuracy in a tiny package.</p>
-                <p class="ar">ثلاثة أجيال من الابتكار في الشبكات العصبية مع تصحيحات التعلم الآلي المستهدفة تقدم دقة استثنائية في حزمة صغيرة.</p>
+                <div class="section-badge en">Live Implementations</div>
+                <div class="section-badge ar">تطبيقات مباشرة</div>
+                <h2 class="en">Real Use Cases, Real Results</h2>
+                <h2 class="ar">حالات استخدام حقيقية، نتائج حقيقية</h2>
+                <p class="en">Each demo below runs the actual Harakat engine. Edit the text and click to see live diacritization.</p>
+                <p class="ar">كل عرض أدناه يشغل محرك حَرَكَات الفعلي. عدل النص وانقر لترى التشكيل المباشر.</p>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="en">State-of-the-Art Accuracy</h3>
-                    <h3 class="ar">دقة عالية جداً</h3>
-                    <p class="en">1.71% Diacritic Error Rate on the Tashkeela benchmark. Our layered neural architecture with ML corrections achieves near-human accuracy.</p>
-                    <p class="ar">نسبة خطأ 1.71% على معيار التشكيلة. بنيتنا العصبية متعددة الطبقات مع تصحيحات التعلم الآلي تحقق دقة قريبة من البشر.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3 class="en">Single File, Zero Dependencies</h3>
-                    <h3 class="ar">ملف واحد، بدون تبعيات</h3>
-                    <p class="en">Everything embedded in one 6MB Python file. No external model downloads, no API calls, no complex setup required.</p>
-                    <p class="ar">كل شيء مدمج في ملف Python واحد بحجم 6 ميجابايت. لا حاجة لتحميل نماذج خارجية أو استدعاء API.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3 class="en">Fully Offline & Private</h3>
-                    <h3 class="ar">يعمل بدون إنترنت</h3>
-                    <p class="en">Runs entirely on your machine. Perfect for privacy-sensitive applications, air-gapped environments, and edge deployment.</p>
-                    <p class="ar">يعمل بالكامل على جهازك. مثالي للتطبيقات الحساسة للخصوصية والبيئات المعزولة.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="en">Lightning Fast</h3>
-                    <h3 class="ar">سريع للغاية</h3>
-                    <p class="en">Process thousands of words per second on CPU. No GPU required for production deployment. Optimized for real-time applications.</p>
-                    <p class="ar">معالجة آلاف الكلمات في الثانية على المعالج. لا حاجة لكرت شاشة. محسّن للتطبيقات الفورية.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
-                    <h3 class="en">Simple Integration</h3>
-                    <h3 class="ar">تكامل سهل</h3>
-                    <p class="en">Clean Python API and CLI. Install with pip, import, and go. Works with Python 3.8+ on Windows, Mac, and Linux.</p>
-                    <p class="ar">واجهة Python و CLI نظيفة. ثبّت واستورد وابدأ. يعمل مع Python 3.8+ على جميع الأنظمة.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
-                    <h3 class="en">Open Source</h3>
-                    <h3 class="ar">مفتوح المصدر</h3>
-                    <p class="en">MIT licensed. Full source code, training methodology, and documentation available. Build upon it, contribute, or learn from it.</p>
-                    <p class="ar">رخصة MIT. الكود المصدري والمنهجية والتوثيق متاحة بالكامل. ابنِ عليه أو ساهم أو تعلم منه.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture Section -->
-    <section class="architecture" id="architecture">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge en">Architecture</div>
-                <div class="section-badge ar">البنية التقنية</div>
-                <h2 class="en">How It Works</h2>
-                <h2 class="ar">كيف يعمل؟</h2>
-                <p class="en">A sophisticated multi-stage pipeline that progressively refines diacritization through neural networks and targeted corrections.</p>
-                <p class="ar">خط معالجة متعدد المراحل يحسّن التشكيل تدريجياً من خلال الشبكات العصبية والتصحيحات المستهدفة.</p>
-            </div>
-
-            <div class="pipeline">
-                <div class="pipeline-stage">
-                    <div class="stage-number">1</div>
-                    <div class="stage-content">
-                        <h4 class="en">Character-Level Transformer</h4>
-                        <h4 class="ar">محول على مستوى الحروف</h4>
-                        <p class="en">BiLSTM + Attention neural network processes text character-by-character for initial diacritization.</p>
-                        <p class="ar">شبكة BiLSTM مع آلية الانتباه تعالج النص حرفاً حرفاً للتشكيل الأولي.</p>
+            <div class="showcase-grid">
+                <!-- Education -->
+                <div class="showcase-card">
+                    <div class="showcase-card-header">
+                        <div class="showcase-icon">📚</div>
+                        <div>
+                            <h3 class="en">Education & Learning</h3>
+                            <h3 class="ar">التعليم والتعلم</h3>
+                            <p class="en">Help students learn proper Arabic pronunciation</p>
+                            <p class="ar">ساعد الطلاب على تعلم النطق العربي الصحيح</p>
+                        </div>
                     </div>
-                    <div class="stage-badge">4.46% DER</div>
-                </div>
-
-                <div class="pipeline-connector">&#8595;</div>
-
-                <div class="pipeline-stage">
-                    <div class="stage-number">2</div>
-                    <div class="stage-content">
-                        <h4 class="en">Case Ending Ensemble</h4>
-                        <h4 class="ar">مجموعة تصحيح الإعراب</h4>
-                        <p class="en">3-model BiLSTM ensemble specializes in Arabic grammatical case endings (i'rab) with 85%+ accuracy.</p>
-                        <p class="ar">مجموعة من 3 نماذج BiLSTM متخصصة في حركات الإعراب العربي بدقة 85%+.</p>
-                    </div>
-                    <div class="stage-badge">2.29% DER</div>
-                </div>
-
-                <div class="pipeline-connector">&#8595;</div>
-
-                <div class="pipeline-stage">
-                    <div class="stage-number">3</div>
-                    <div class="stage-content">
-                        <h4 class="en">ML Corrections Layer</h4>
-                        <h4 class="ar">طبقة تصحيحات التعلم الآلي</h4>
-                        <p class="en">TF-IDF + LogisticRegression classifiers for homograph disambiguation, voice correction, and particle rules.</p>
-                        <p class="ar">مصنفات TF-IDF + الانحدار اللوجستي لفك لبس المتجانسات وتصحيح الصيغ وقواعد الأدوات.</p>
-                    </div>
-                    <div class="stage-badge">1.71% DER</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section class="comparison" id="comparison">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge en">Benchmarks</div>
-                <div class="section-badge ar">المقارنات</div>
-                <h2 class="en">Performance Comparison</h2>
-                <h2 class="ar">مقارنة الأداء</h2>
-                <p class="en">How Harakat stacks up against other Arabic diacritization systems on the Tashkeela benchmark.</p>
-                <p class="ar">كيف يقارن حَرَكَات مع أنظمة التشكيل العربي الأخرى على معيار التشكيلة.</p>
-            </div>
-
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th class="en">System</th>
-                            <th class="ar">النظام</th>
-                            <th>DER</th>
-                            <th>WER</th>
-                            <th class="en">Size</th>
-                            <th class="ar">الحجم</th>
-                            <th class="en">Offline</th>
-                            <th class="ar">بدون إنترنت</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="highlight">
-                            <td>
-                                Harakat V3.5
-                                <span class="table-badge en">Current</span>
-                                <span class="table-badge ar">الحالي</span>
-                            </td>
-                            <td><strong>1.71%</strong></td>
-                            <td><strong>6.13%</strong></td>
-                            <td><strong>6 MB</strong></td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                        <tr>
-                            <td>Harakat V2</td>
-                            <td>2.29%</td>
-                            <td>6.44%</td>
-                            <td>6 MB</td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                        <tr>
-                            <td>Harakat V1</td>
-                            <td>4.46%</td>
-                            <td>12.19%</td>
-                            <td>3 MB</td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                        <tr>
-                            <td>SUKOUN (2024 SOTA)</td>
-                            <td>0.92%</td>
-                            <td>-</td>
-                            <td>~436 MB</td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                        <tr>
-                            <td>Shakkala</td>
-                            <td>~3.0%</td>
-                            <td>-</td>
-                            <td>~20 MB</td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                        <tr>
-                            <td>Mishkal</td>
-                            <td>~5.5%</td>
-                            <td>-</td>
-                            <td>~50 MB</td>
-                            <td><span class="check-icon">&#10003;</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section class="use-cases" id="use-cases">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge en">Applications</div>
-                <div class="section-badge ar">التطبيقات</div>
-                <h2 class="en">Use Cases</h2>
-                <h2 class="ar">حالات الاستخدام</h2>
-                <p class="en">Harakat powers Arabic text processing across education, technology, and beyond.</p>
-                <p class="ar">حَرَكَات يدعم معالجة النصوص العربية في التعليم والتقنية وغيرها.</p>
-            </div>
-
-            <div class="use-cases-grid">
-                <div class="use-case-card">
-                    <div class="use-case-icon">📚</div>
-                    <h4 class="en">Education</h4>
-                    <h4 class="ar">التعليم</h4>
-                    <p class="en">Help students learn Arabic reading with proper pronunciation guides.</p>
-                    <p class="ar">ساعد الطلاب على تعلم القراءة العربية مع دليل النطق الصحيح.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">🗣️</div>
-                    <h4 class="en">Text-to-Speech</h4>
-                    <h4 class="ar">تحويل النص لصوت</h4>
-                    <p class="en">Prepare Arabic text for accurate speech synthesis and voice assistants.</p>
-                    <p class="ar">جهّز النص العربي للتركيب الصوتي الدقيق والمساعدين الصوتيين.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">📰</div>
-                    <h4 class="en">Publishing</h4>
-                    <h4 class="ar">النشر</h4>
-                    <p class="en">Automatically diacritize books, newspapers, and digital content.</p>
-                    <p class="ar">شكّل الكتب والصحف والمحتوى الرقمي تلقائياً.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">🕌</div>
-                    <h4 class="en">Religious Texts</h4>
-                    <h4 class="ar">النصوص الدينية</h4>
-                    <p class="en">Ensure accurate voweling for Quranic and Islamic scholarly texts.</p>
-                    <p class="ar">ضمان التشكيل الصحيح للنصوص القرآنية والإسلامية العلمية.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">🤖</div>
-                    <h4 class="en">NLP Pipelines</h4>
-                    <h4 class="ar">معالجة اللغة</h4>
-                    <p class="en">Essential preprocessing step for Arabic NLP and machine learning tasks.</p>
-                    <p class="ar">خطوة معالجة أساسية لمهام التعلم الآلي ومعالجة اللغة العربية.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">📱</div>
-                    <h4 class="en">Mobile Apps</h4>
-                    <h4 class="ar">تطبيقات الجوال</h4>
-                    <p class="en">Lightweight enough for on-device processing without cloud dependency.</p>
-                    <p class="ar">خفيف بما يكفي للمعالجة على الجهاز بدون الاعتماد على السحابة.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">🔐</div>
-                    <h4 class="en">Secure Environments</h4>
-                    <h4 class="ar">البيئات الآمنة</h4>
-                    <p class="en">Offline operation perfect for sensitive data and classified systems.</p>
-                    <p class="ar">التشغيل دون اتصال مثالي للبيانات الحساسة والأنظمة السرية.</p>
-                </div>
-
-                <div class="use-case-card">
-                    <div class="use-case-icon">🌐</div>
-                    <h4 class="en">Web Services</h4>
-                    <h4 class="ar">خدمات الويب</h4>
-                    <p class="en">Server-side diacritization for web applications and APIs.</p>
-                    <p class="ar">تشكيل على الخادم لتطبيقات الويب وواجهات البرمجة.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Installation Section -->
-    <section class="installation" id="install">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge en">Get Started</div>
-                <div class="section-badge ar">ابدأ الآن</div>
-                <h2 class="en">Installation</h2>
-                <h2 class="ar">التثبيت</h2>
-                <p class="en">Get up and running in seconds with multiple installation options.</p>
-                <p class="ar">ابدأ العمل في ثوانٍ مع خيارات تثبيت متعددة.</p>
-            </div>
-
-            <div class="install-grid">
-                <div class="install-card">
-                    <div class="install-header">
-                        <span>📥</span>
-                        <h3 class="en">Quick Install</h3>
-                        <h3 class="ar">التثبيت السريع</h3>
-                    </div>
-                    <div class="install-body">
-                        <div class="code-block">
-<span class="comment"># Clone the repository</span>
-<span class="keyword">git clone</span> https://github.com/jeranaias/harakat.git
-<span class="keyword">cd</span> harakat
-
-<span class="comment"># Install dependencies</span>
-<span class="keyword">pip install</span> -r requirements.txt
-
-<span class="comment"># Test it out</span>
-<span class="keyword">python</span> harakat.py <span class="string">"مرحبا بالعالم"</span>
-<span class="comment"># Output: مَرْحَبًا بِالْعَالَمِ</span>
+                    <div class="showcase-card-body">
+                        <div class="showcase-demo">
+                            <div class="showcase-demo-header">
+                                <span class="showcase-demo-title">education_demo.py</span>
+                                <button class="showcase-demo-btn" onclick="runShowcase('edu')">Run</button>
+                            </div>
+                            <div class="showcase-demo-content">
+                                <textarea class="showcase-input" id="edu-input" rows="2">الطالب يقرا الكتاب في المكتبة</textarea>
+                                <div class="showcase-arrow">↓</div>
+                                <div class="showcase-output" id="edu-output">Click "Run" to diacritize</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="install-card">
-                    <div class="install-header">
-                        <span>🐍</span>
-                        <h3 class="en">Python API</h3>
-                        <h3 class="ar">واجهة Python</h3>
+                <!-- Religious Texts -->
+                <div class="showcase-card">
+                    <div class="showcase-card-header">
+                        <div class="showcase-icon">🕌</div>
+                        <div>
+                            <h3 class="en">Religious Texts</h3>
+                            <h3 class="ar">النصوص الدينية</h3>
+                            <p class="en">Accurate voweling for Quranic and Islamic texts</p>
+                            <p class="ar">تشكيل دقيق للنصوص القرآنية والإسلامية</p>
+                        </div>
                     </div>
-                    <div class="install-body">
-                        <div class="code-block">
-<span class="keyword">from</span> harakat <span class="keyword">import</span> diacritize
+                    <div class="showcase-card-body">
+                        <div class="showcase-demo">
+                            <div class="showcase-demo-header">
+                                <span class="showcase-demo-title">religious_demo.py</span>
+                                <button class="showcase-demo-btn" onclick="runShowcase('religious')">Run</button>
+                            </div>
+                            <div class="showcase-demo-content">
+                                <textarea class="showcase-input" id="religious-input" rows="2">قل هو الله احد الله الصمد</textarea>
+                                <div class="showcase-arrow">↓</div>
+                                <div class="showcase-output" id="religious-output">Click "Run" to diacritize</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<span class="comment"># Simple usage</span>
-text = <span class="string">"ذهب الولد إلى المدرسة"</span>
+                <!-- Text-to-Speech -->
+                <div class="showcase-card">
+                    <div class="showcase-card-header">
+                        <div class="showcase-icon">🗣️</div>
+                        <div>
+                            <h3 class="en">Text-to-Speech Prep</h3>
+                            <h3 class="ar">تجهيز النص للصوت</h3>
+                            <p class="en">Prepare text for accurate speech synthesis</p>
+                            <p class="ar">جهز النص للتركيب الصوتي الدقيق</p>
+                        </div>
+                    </div>
+                    <div class="showcase-card-body">
+                        <div class="showcase-demo">
+                            <div class="showcase-demo-header">
+                                <span class="showcase-demo-title">tts_prep.py</span>
+                                <button class="showcase-demo-btn" onclick="runShowcase('tts')">Run</button>
+                            </div>
+                            <div class="showcase-demo-content">
+                                <textarea class="showcase-input" id="tts-input" rows="2">مرحبا بكم في تطبيقنا الجديد</textarea>
+                                <div class="showcase-arrow">↓</div>
+                                <div class="showcase-output" id="tts-output">Click "Run" to diacritize</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publishing -->
+                <div class="showcase-card">
+                    <div class="showcase-card-header">
+                        <div class="showcase-icon">📰</div>
+                        <div>
+                            <h3 class="en">Publishing & Media</h3>
+                            <h3 class="ar">النشر والإعلام</h3>
+                            <p class="en">Diacritize articles, books, and news content</p>
+                            <p class="ar">شكل المقالات والكتب والأخبار</p>
+                        </div>
+                    </div>
+                    <div class="showcase-card-body">
+                        <div class="showcase-demo">
+                            <div class="showcase-demo-header">
+                                <span class="showcase-demo-title">publishing.py</span>
+                                <button class="showcase-demo-btn" onclick="runShowcase('pub')">Run</button>
+                            </div>
+                            <div class="showcase-demo-content">
+                                <textarea class="showcase-input" id="pub-input" rows="2">اعلنت الحكومة عن خطة جديدة لتطوير التعليم</textarea>
+                                <div class="showcase-arrow">↓</div>
+                                <div class="showcase-output" id="pub-output">Click "Run" to diacritize</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Integration -->
+    <section class="integration" id="integration">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge en">Integration</div>
+                <div class="section-badge ar">التكامل</div>
+                <h2 class="en">Add to Your Project</h2>
+                <h2 class="ar">أضفه لمشروعك</h2>
+                <p class="en">Three lines of code to add Arabic diacritization to any Python project.</p>
+                <p class="ar">ثلاثة أسطر لإضافة التشكيل العربي لأي مشروع Python.</p>
+            </div>
+
+            <div class="code-tabs">
+                <button class="code-tab active" onclick="showCodeTab('python')">Python</button>
+                <button class="code-tab" onclick="showCodeTab('cli')">CLI</button>
+                <button class="code-tab" onclick="showCodeTab('api')">API</button>
+            </div>
+
+            <div class="code-block" id="code-python">
+                <div class="code-block-header">
+                    <span class="code-block-title">diacritize.py</span>
+                    <button class="code-block-copy" onclick="copyCode('python')">Copy</button>
+                </div>
+                <pre><span class="keyword">from</span> harakat <span class="keyword">import</span> diacritize
+
+<span class="comment"># Single text</span>
+text = <span class="string">"ذهب الولد الى المدرسة"</span>
 result = <span class="function">diacritize</span>(text)
 <span class="keyword">print</span>(result)
-<span class="comment"># ذَهَبَ الْوَلَدُ إِلَى الْمَدْرَسَةِ</span>
+<span class="comment"># Output: ذَهَبَ الْوَلَدُ إِلَى الْمَدْرَسَةِ</span>
 
 <span class="comment"># Batch processing</span>
-texts = [<span class="string">"السلام عليكم"</span>, <span class="string">"كيف حالك"</span>]
-results = [<span class="function">diacritize</span>(t) <span class="keyword">for</span> t <span class="keyword">in</span> texts]
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Version Timeline -->
-    <section class="timeline" id="timeline">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge en">Evolution</div>
-                <div class="section-badge ar">التطور</div>
-                <h2 class="en">Version History</h2>
-                <h2 class="ar">تاريخ الإصدارات</h2>
-                <p class="en">From 9% to 1.71% DER - the journey of continuous improvement.</p>
-                <p class="ar">من 9% إلى 1.71% - رحلة التحسين المستمر.</p>
+texts = [<span class="string">"السلام عليكم"</span>, <span class="string">"كيف حالك"</span>, <span class="string">"الحمد لله"</span>]
+results = [<span class="function">diacritize</span>(t) <span class="keyword">for</span> t <span class="keyword">in</span> texts]</pre>
             </div>
 
-            <div class="timeline-container">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-version">V3.5</div>
-                        <div class="timeline-der">1.71%</div>
-                        <p class="timeline-desc en">ML corrections layer with homograph disambiguation, voice correction, and calibrated confidence thresholds.</p>
-                        <p class="timeline-desc ar">طبقة تصحيحات التعلم الآلي مع فك لبس المتجانسات وتصحيح الصيغ وعتبات الثقة المعايرة.</p>
-                    </div>
+            <div class="code-block" id="code-cli" style="display: none;">
+                <div class="code-block-header">
+                    <span class="code-block-title">terminal</span>
+                    <button class="code-block-copy" onclick="copyCode('cli')">Copy</button>
                 </div>
+                <pre><span class="comment"># Install</span>
+$ git clone https://github.com/jeranaias/harakat.git
+$ cd harakat
+$ pip install -r requirements.txt
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-version">V2</div>
-                        <div class="timeline-der">2.29%</div>
-                        <p class="timeline-desc en">3-model BiLSTM ensemble for case endings. Introduced hybrid correction for internal vowels.</p>
-                        <p class="timeline-desc ar">مجموعة من 3 نماذج BiLSTM للإعراب. تصحيح هجين للحركات الداخلية.</p>
-                    </div>
-                </div>
+<span class="comment"># Run on text</span>
+$ python harakat.py <span class="string">"مرحبا بالعالم"</span>
+<span class="string">مَرْحَبًا بِالْعَالَمِ</span>
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-version">V1</div>
-                        <div class="timeline-der">4.46%</div>
-                        <p class="timeline-desc en">Character-level BiLSTM + Attention. Single model architecture with LZMA compression.</p>
-                        <p class="timeline-desc ar">BiLSTM على مستوى الحروف مع الانتباه. نموذج واحد مع ضغط LZMA.</p>
-                    </div>
-                </div>
+<span class="comment"># Run on file</span>
+$ python harakat.py --file input.txt --output diacritized.txt</pre>
+            </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-version">V0</div>
-                        <div class="timeline-der">~9%</div>
-                        <p class="timeline-desc en">Initial prototype. Basic sequence-to-sequence model for proof of concept.</p>
-                        <p class="timeline-desc ar">النموذج الأولي. نموذج تسلسل-إلى-تسلسل أساسي لإثبات المفهوم.</p>
-                    </div>
+            <div class="code-block" id="code-api" style="display: none;">
+                <div class="code-block-header">
+                    <span class="code-block-title">api_example.js</span>
+                    <button class="code-block-copy" onclick="copyCode('api')">Copy</button>
                 </div>
+                <pre><span class="comment">// Call the Harakat API</span>
+<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'https://harakat-api.vercel.app/api/diacritize'</span>, {
+    method: <span class="string">'POST'</span>,
+    headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
+    body: JSON.<span class="function">stringify</span>({ text: <span class="string">'مرحبا بالعالم'</span> })
+});
+
+<span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="function">json</span>();
+console.<span class="function">log</span>(data.output);
+<span class="comment">// Output: مَرْحَبًا بِالْعَالَمِ</span></pre>
             </div>
         </div>
     </section>
@@ -1619,146 +1011,165 @@ results = [<span class="function">diacritize</span>(t) <span class="keyword">for
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Harakat</h3>
-                    <p class="en">High-accuracy Arabic diacritization in a lightweight package. Built with passion by Jesse Morgan. Open source under MIT license.</p>
-                    <p class="ar">تشكيل عربي عالي الدقة في حزمة خفيفة. بُني بشغف بواسطة جيسي مورغان. مفتوح المصدر تحت رخصة MIT.</p>
+                    <p class="en">High-accuracy Arabic diacritization. Built by Jesse Morgan.</p>
+                    <p class="ar">تشكيل عربي عالي الدقة. بناء جيسي مورغان.</p>
                 </div>
-
                 <div class="footer-links">
-                    <h4 class="en">Resources</h4>
-                    <h4 class="ar">الموارد</h4>
-                    <ul>
-                        <li><a href="https://github.com/jeranaias/harakat">GitHub</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat#installation" class="en">Documentation</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat#installation" class="ar">التوثيق</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/blob/main/METHODOLOGY.md" class="en">Methodology</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/blob/main/METHODOLOGY.md" class="ar">المنهجية</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4 class="en">Community</h4>
-                    <h4 class="ar">المجتمع</h4>
-                    <ul>
-                        <li><a href="https://github.com/jeranaias/harakat/issues" class="en">Issues</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/issues" class="ar">المشاكل</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/pulls" class="en">Pull Requests</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/pulls" class="ar">طلبات الدمج</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/discussions" class="en">Discussions</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/discussions" class="ar">النقاشات</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4 class="en">Legal</h4>
-                    <h4 class="ar">القانوني</h4>
-                    <ul>
-                        <li><a href="https://github.com/jeranaias/harakat/blob/main/LICENSE" class="en">MIT License</a></li>
-                        <li><a href="https://github.com/jeranaias/harakat/blob/main/LICENSE" class="ar">رخصة MIT</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p class="en">Built with dedication. Star us on GitHub!</p>
-                <p class="ar">بُني بتفانٍ. قيّمنا على GitHub!</p>
-                <div class="social-links">
-                    <a href="https://github.com/jeranaias/harakat" target="_blank" title="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    </a>
+                    <a href="https://github.com/jeranaias/harakat" target="_blank">GitHub</a>
+                    <a href="https://github.com/jeranaias/harakat#installation" target="_blank">Documentation</a>
+                    <a href="https://github.com/jeranaias/harakat/issues" target="_blank">Issues</a>
+                    <a href="https://github.com/jeranaias/harakat/blob/main/LICENSE" target="_blank">MIT License</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Demo examples database
-        const examples = {
-            "ذهب الولد إلى المدرسة": "ذَهَبَ الْوَلَدُ إِلَى الْمَدْرَسَةِ",
-            "الكتاب على الطاولة": "الْكِتَابُ عَلَى الطَّاوِلَةِ",
-            "مرحبا بالعالم": "مَرْحَبًا بِالْعَالَمِ",
-            "السلام عليكم": "السَّلَامُ عَلَيْكُمْ",
-            "الحمد لله رب العالمين": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-            "بسم الله الرحمن الرحيم": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-            "كيف حالك": "كَيْفَ حَالُكَ",
-            "العلم نور": "الْعِلْمُ نُورٌ",
-            "من طلب العلا سهر الليالي": "مَنْ طَلَبَ الْعُلَا سَهِرَ اللَّيَالِي",
-            "هذا كتاب جميل": "هَذَا كِتَابٌ جَمِيلٌ",
-            "انا احب اللغة العربية": "أَنَا أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ",
-            "الصبر مفتاح الفرج": "الصَّبْرُ مِفْتَاحُ الْفَرَجِ",
-        };
+        // API endpoint
+        const API_URL = 'https://harakat-api.vercel.app/api/diacritize';
+        let isApiReady = false;
 
-        // Language switching
-        function setLanguage(lang) {
-            const body = document.body;
-            const enBtn = document.querySelector('.lang-btn:first-child');
-            const arBtn = document.querySelector('.lang-btn:last-child');
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateStatus('loading', 'Connecting to Harakat API...');
 
-            if (lang === 'ar') {
-                body.classList.add('rtl');
-                body.setAttribute('dir', 'rtl');
-                document.documentElement.lang = 'ar';
-                enBtn.classList.remove('active');
-                arBtn.classList.add('active');
-            } else {
-                body.classList.remove('rtl');
-                body.setAttribute('dir', 'ltr');
-                document.documentElement.lang = 'en';
-                enBtn.classList.add('active');
-                arBtn.classList.remove('active');
+            try {
+                const response = await fetch(API_URL.replace('/diacritize', ''), {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                if (response.ok) {
+                    isApiReady = true;
+                    updateStatus('ready', 'Harakat API Ready');
+                    diacritizeMain();
+                } else {
+                    throw new Error('API not available');
+                }
+            } catch (e) {
+                updateStatus('error', 'API offline - Deploy your own or run locally');
+                document.getElementById('main-output').innerHTML =
+                    '<span style="color: var(--gray-light); font-size: 16px;">API is being set up. To run locally:<br><br>' +
+                    '<code style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; display: block; margin-top: 8px;">git clone https://github.com/jeranaias/harakat<br>cd harakat && pip install -r requirements.txt<br>python harakat.py "your text here"</code></span>';
             }
 
-            // Save preference
+            const savedLang = localStorage.getItem('harakat-lang');
+            if (savedLang) setLanguage(savedLang);
+        });
+
+        function updateStatus(state, text) {
+            const indicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            indicator.className = 'status-indicator ' + state;
+            statusText.textContent = text;
+        }
+
+        async function diacritizeMain() {
+            const input = document.getElementById('main-input').value.trim();
+            const output = document.getElementById('main-output');
+            const btn = document.getElementById('diacritize-btn');
+
+            if (!input) { output.textContent = ''; return; }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            output.textContent = 'Diacritizing...';
+
+            try {
+                const result = await callAPI(input);
+                output.textContent = result;
+            } catch (e) {
+                output.innerHTML = '<span style="color: #ef4444;">Error: ' + e.message + '</span>';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<span class="en-inline">Diacritize</span><span class="ar-inline">شَكِّل</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        }
+
+        async function runShowcase(id) {
+            const input = document.getElementById(id + '-input').value.trim();
+            const output = document.getElementById(id + '-output');
+
+            if (!input) return;
+
+            output.textContent = 'Diacritizing...';
+            output.classList.add('loading');
+
+            try {
+                const result = await callAPI(input);
+                output.textContent = result;
+                output.classList.remove('loading');
+            } catch (e) {
+                output.innerHTML = '<span style="color: #ef4444;">Error: ' + e.message + '</span>';
+                output.classList.remove('loading');
+            }
+        }
+
+        async function callAPI(text) {
+            if (!isApiReady) {
+                throw new Error('API not connected. Run locally or deploy the API.');
+            }
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+
+            if (!response.ok) throw new Error('API request failed');
+
+            const data = await response.json();
+            if (!data.success) throw new Error(data.error || 'Unknown error');
+
+            return data.output;
+        }
+
+        function setExample(text) {
+            document.getElementById('main-input').value = text;
+            diacritizeMain();
+        }
+
+        function clearMain() {
+            document.getElementById('main-input').value = '';
+            document.getElementById('main-output').textContent = '';
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('main-output').textContent;
+            if (output && !output.includes('Error')) {
+                navigator.clipboard.writeText(output);
+                alert('Copied to clipboard!');
+            }
+        }
+
+        function setLanguage(lang) {
+            document.body.classList.toggle('rtl', lang === 'ar');
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', (lang === 'en' && i === 0) || (lang === 'ar' && i === 1));
+            });
+
             localStorage.setItem('harakat-lang', lang);
         }
 
-        // Demo functionality
-        function setExample(text) {
-            document.getElementById('demo-input').value = text;
-            runDemo();
+        function showCodeTab(tab) {
+            document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.code-block').forEach(b => b.style.display = 'none');
+            event.target.classList.add('active');
+            document.getElementById('code-' + tab).style.display = 'block';
         }
 
-        function runDemo() {
-            const input = document.getElementById('demo-input').value.trim();
-            const output = document.getElementById('demo-output');
-
-            if (examples[input]) {
-                output.textContent = examples[input];
-                output.style.color = 'var(--secondary)';
-            } else if (input) {
-                output.innerHTML = '<span style="color: var(--gray-light); font-size: 16px;">Install Harakat for full diacritization</span>';
-            } else {
-                output.textContent = '';
-            }
+        function copyCode(tab) {
+            const code = document.querySelector('#code-' + tab + ' pre').textContent;
+            navigator.clipboard.writeText(code);
+            event.target.textContent = 'Copied!';
+            setTimeout(() => event.target.textContent = 'Copy', 2000);
         }
-
-        // Auto-run demo on input
-        document.getElementById('demo-input').addEventListener('input', runDemo);
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load saved language preference
-            const savedLang = localStorage.getItem('harakat-lang');
-            if (savedLang) {
-                setLanguage(savedLang);
-            }
-
-            // Run initial demo
-            runDemo();
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-        });
     </script>
 </body>
 </html>
