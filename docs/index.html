@@ -994,16 +994,21 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
                     <span class="code-block-title">api_example.js</span>
                     <button class="code-block-copy" onclick="copyCode('api')">Copy</button>
                 </div>
-                <pre><span class="comment">// Call the Harakat API</span>
-<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'https://harakat-api.vercel.app/api/diacritize'</span>, {
+                <pre><span class="comment">// Call the Harakat API (Gradio format)</span>
+<span class="keyword">const</span> API = <span class="string">'https://jcmguy-harakat.hf.space'</span>;
+
+<span class="comment">// Step 1: Submit request</span>
+<span class="keyword">const</span> call = <span class="keyword">await</span> <span class="function">fetch</span>(API + <span class="string">'/call/predict'</span>, {
     method: <span class="string">'POST'</span>,
     headers: { <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> },
-    body: JSON.<span class="function">stringify</span>({ text: <span class="string">'مرحبا بالعالم'</span> })
+    body: JSON.<span class="function">stringify</span>({ data: [<span class="string">'مرحبا بالعالم'</span>] })
 });
+<span class="keyword">const</span> { event_id } = <span class="keyword">await</span> call.<span class="function">json</span>();
 
-<span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="function">json</span>();
-console.<span class="function">log</span>(data.output);
-<span class="comment">// Output: مَرْحَبًا بِالْعَالَمِ</span></pre>
+<span class="comment">// Step 2: Get result</span>
+<span class="keyword">const</span> result = <span class="keyword">await</span> <span class="function">fetch</span>(API + <span class="string">'/call/predict/'</span> + event_id);
+<span class="keyword">const</span> text = <span class="keyword">await</span> result.<span class="function">text</span>();
+<span class="comment">// Parse SSE: data: ["مَرْحَبًا بِالْعَالَمِ"]</span></pre>
             </div>
         </div>
     </section>
@@ -1019,6 +1024,7 @@ console.<span class="function">log</span>(data.output);
                 </div>
                 <div class="footer-links">
                     <a href="https://github.com/jeranaias/harakat" target="_blank">GitHub</a>
+                    <a href="https://huggingface.co/spaces/jcmguy/harakat" target="_blank">HF Space</a>
                     <a href="https://github.com/jeranaias/harakat#installation" target="_blank">Documentation</a>
                     <a href="https://github.com/jeranaias/harakat/issues" target="_blank">Issues</a>
                     <a href="https://github.com/jeranaias/harakat/blob/main/LICENSE" target="_blank">MIT License</a>
@@ -1028,8 +1034,8 @@ console.<span class="function">log</span>(data.output);
     </footer>
 
     <script>
-        // API endpoint
-        const API_URL = 'https://harakat-api.vercel.app/api/diacritize';
+        // API endpoint (Gradio-based HF Space)
+        const API_BASE = 'https://jcmguy-harakat.hf.space';
         let isApiReady = false;
 
         // Initialize
@@ -1037,7 +1043,8 @@ console.<span class="function">log</span>(data.output);
             updateStatus('loading', 'Connecting to Harakat API...');
 
             try {
-                const response = await fetch(API_URL.replace('/diacritize', ''), {
+                // Test if space is responding
+                const response = await fetch(API_BASE + '/', {
                     method: 'GET',
                     mode: 'cors'
                 });
@@ -1050,10 +1057,11 @@ console.<span class="function">log</span>(data.output);
                     throw new Error('API not available');
                 }
             } catch (e) {
-                updateStatus('error', 'API offline - Deploy your own or run locally');
+                // HF Spaces might be sleeping, try anyway
+                updateStatus('loading', 'Waking up Harakat API...');
+                isApiReady = true;  // Let user try - HF will wake on first request
                 document.getElementById('main-output').innerHTML =
-                    '<span style="color: var(--gray-light); font-size: 16px;">API is being set up. To run locally:<br><br>' +
-                    '<code style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; display: block; margin-top: 8px;">git clone https://github.com/jeranaias/harakat<br>cd harakat && pip install -r requirements.txt<br>python harakat.py "your text here"</code></span>';
+                    '<span style="color: var(--gray-light); font-size: 16px;">API is warming up (first request may take ~30s).<br>Click "Diacritize" to start.</span>';
             }
 
             const savedLang = localStorage.getItem('harakat-lang');
@@ -1113,18 +1121,35 @@ console.<span class="function">log</span>(data.output);
                 throw new Error('API not connected. Run locally or deploy the API.');
             }
 
-            const response = await fetch(API_URL, {
+            // Step 1: Call Gradio's predict endpoint to get event_id
+            const callResponse = await fetch(API_BASE + '/call/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text })
+                body: JSON.stringify({ data: [text] })
             });
 
-            if (!response.ok) throw new Error('API request failed');
+            if (!callResponse.ok) throw new Error('API request failed');
 
-            const data = await response.json();
-            if (!data.success) throw new Error(data.error || 'Unknown error');
+            const { event_id } = await callResponse.json();
 
-            return data.output;
+            // Step 2: Get result from event stream
+            const resultResponse = await fetch(API_BASE + '/call/predict/' + event_id);
+            const resultText = await resultResponse.text();
+
+            // Parse Server-Sent Events format
+            for (const line of resultText.split('\n')) {
+                if (line.startsWith('data:')) {
+                    const dataStr = line.substring(5).trim();
+                    if (dataStr) {
+                        const parsed = JSON.parse(dataStr);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            return parsed[0];
+                        }
+                    }
+                }
+            }
+
+            throw new Error('No result received');
         }
 
         function setExample(text) {

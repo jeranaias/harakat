@@ -6,7 +6,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![DER: 1.64%](https://img.shields.io/badge/DER-1.71%25-brightgreen.svg)]()
 
-> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** — See Harakat in action with our interactive bilingual showcase (English/Arabic).
+> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** — Interactive bilingual showcase | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** — Direct Gradio interface
 
 ---
 

@@ -101,3 +101,5 @@ update_*.py
 *.egg-info/
 dist/
 build/
+
+.vercel
