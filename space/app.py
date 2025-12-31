@@ -34,24 +34,24 @@ demo = gr.Interface(
         elem_id="output-box"
     ),
     title="حَرَكَات - Harakat",
-    description="""
-    **High-Accuracy Arabic Diacritization** | **تشكيل عربي عالي الدقة**
+    description="""**High-Accuracy Arabic Diacritization** | **تشكيل عربي عالي الدقة**
 
-    2.29% DER • 1.53% (no case) • 6 MB Model • 73x Smaller than SOTA • **99.997% Quran Accuracy**
+📊 **2.29% DER** • **1.53% DER (no case)** • **6 MB** • **73x smaller than SOTA**
 
-    Paste any Arabic text and click Submit to add diacritical marks (tashkeel).
-    Quranic text is automatically detected and diacritized with near-perfect accuracy.
+📖 **99.997% Quran Accuracy** — Quranic text auto-detected
 
-    الصق أي نص عربي واضغط Submit لإضافة التشكيل.
-    النصوص القرآنية تُكتشف تلقائياً وتُشكَّل بدقة شبه مثالية.
-    """,
+---
+
+Paste any Arabic text and click Submit. Quranic phrases are automatically detected.
+
+الصق أي نص عربي واضغط Submit. النصوص القرآنية تُكتشف تلقائياً.""",
     examples=[
-        ["بسم الله الرحمن الرحيم"],
-        ["ذهب الولد الى المدرسة"],
         ["الحمد لله رب العالمين الرحمن الرحيم مالك يوم الدين"],
+        ["بسم الله الرحمن الرحيم"],
+        ["قل هو الله احد الله الصمد لم يلد ولم يولد"],
+        ["ذهب الولد الى المدرسة ليتعلم العلوم المفيدة"],
         ["العلم نور والجهل ظلام"],
         ["من جد وجد ومن زرع حصد"],
-        ["قل هو الله احد الله الصمد"],
     ],
     theme=gr.themes.Soft(),
     css="""

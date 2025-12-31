@@ -105,7 +105,9 @@ Harakat V3.5 represents three generations of innovation in Arabic diacritization
 | Metric | Value |
 |--------|-------|
 | **Diacritic Error Rate (DER)** | 2.29% (test), 2.27% (validation) |
+| **DER without case endings** | 1.53% (test) |
 | **Word Error Rate (WER)** | 6.37% (test), 7.20% (validation) |
+| **Quran Accuracy** | **99.997%** (82,240/82,242 words) |
 | **Model Size** | 6 MB (single Python file) |
 | **vs. Base Model** | 75% DER reduction (9.06% → 2.29%) |
 | **vs. SUKOUN (SOTA)** | 73x smaller, competitive accuracy |
@@ -124,8 +126,9 @@ Input Text → V2 Neural Pipeline → V3.5 Corrections → Output
 
 1. **Error-Report Disambiguation**: Instead of learning diacritization from scratch, we learn to fix a model's specific mistakes
 2. **Layered Corrections**: Each version adds targeted fixes for remaining error categories
-3. **Single-File Deployment**: Everything embedded in one portable Python file
-4. **No Cloud Required**: Runs completely offline on any device
+3. **Quran Mode**: Near-perfect (99.997%) accuracy on Quranic text with auto-detection
+4. **Single-File Deployment**: Everything embedded in one portable Python file
+5. **No Cloud Required**: Runs completely offline on any device
 
 ---
 
@@ -219,16 +222,22 @@ Result: 97.4% case accuracy (vs 94.1% single model)
 3. **Overfitting**: Small model, large corpus. Solution: aggressive dropout (0.5) + early stopping.
 4. **Inference speed**: Full model was slow. Solution: quantization + ONNX export.
 
-### V3.5: ML-Based Corrections (2.29% DER)
+### V3.5: Quran Mode + ML Corrections (2.29% DER)
 
-V3.5 represents the culmination of our error-driven methodology. After V2's success with neural case prediction, we analyzed the remaining 2.29% DER to identify systematic patterns that ML classifiers could fix.
+V3.5 represents the culmination of our error-driven methodology, adding two major features:
 
+**Quran Mode** (NEW):
+- **99.997% accuracy** on Quranic text (82,240/82,242 words correct)
+- Auto-detection of Quranic phrases
+- Embedded Uthmani lookup table (~0.5 MB LZMA compressed)
+
+**ML Corrections**:
 - **Homograph Disambiguation**: TF-IDF + LogisticRegression for context-aware word sense
 - **Voice Correction**: Active/passive verb form disambiguation
 - **Rule-Based Fixes**: Particle kasra, anna/sunna patterns
 - **Calibrated Thresholds**: Per-classifier confidence routing
-- **Improvement**: 25% DER reduction from V2
-- **Size**: 6 MB (everything embedded)
+- **No-Case DER Improvement**: 1.95% → 1.53% (22% reduction in internal vowel errors)
+- **Size**: 6 MB (everything embedded in single Python file)
 
 #### Error Analysis: What Remained After V2
 
