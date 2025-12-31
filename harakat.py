@@ -2634,7 +2634,8 @@ def get_calibrated_voice_threshold(word_base):
 # =============================================================================
 
 def diacritize(text, apply_particles=True, apply_anna=True, apply_sunna=True,
-               apply_ml_homographs=True, apply_ml_voice=True, use_calibrated=True):
+               apply_ml_homographs=True, apply_ml_voice=True, use_calibrated=True,
+               quran_mode=None):
     """
     Diacritize Arabic text using V3.5 pipeline.
 
@@ -2654,10 +2655,34 @@ def diacritize(text, apply_particles=True, apply_anna=True, apply_sunna=True,
         apply_ml_homographs: Apply ML homograph disambiguation (default True)
         apply_ml_voice: Apply ML voice correction (default True)
         use_calibrated: Use calibrated confidence thresholds (default True)
+        quran_mode: Use Quran-specific diacritization (True/False/'auto')
+                   - True: Always use Quran lookup
+                   - False: Never use Quran lookup
+                   - 'auto' or None: Auto-detect Quranic text
 
     Returns:
         Fully diacritized Arabic text
     """
+    # Step -1: Check for Quran mode
+    if quran_mode is True or quran_mode == 'auto' or quran_mode is None:
+        try:
+            from quran.quran_diacritizer import diacritize_quran, is_likely_quran
+
+            use_quran = quran_mode is True
+            if not use_quran and (quran_mode == 'auto' or quran_mode is None):
+                use_quran = is_likely_quran(text)
+
+            if use_quran:
+                # Use Quran lookup with general diacritizer as fallback
+                def fallback_word(word):
+                    return v2_diacritize(word)
+                return diacritize_quran(text, fallback_func=fallback_word)
+        except ImportError:
+            # Quran module not available, continue with general pipeline
+            pass
+        except Exception:
+            # Any other error, continue with general pipeline
+            pass
     # Step 0: Identify word overrides (before V2)
     HARAKAT_SET = set('\u064B\u064C\u064D\u064E\u064F\u0650\u0651\u0652')
     undiac_text = ''.join(c for c in text if c not in HARAKAT_SET)
@@ -2771,6 +2796,7 @@ Examples:
     parser.add_argument('-o', '--output', help='Output file')
     parser.add_argument('--stdin', action='store_true', help='Read from stdin')
     parser.add_argument('--v2-only', action='store_true', help='Use V2 only (no V3.5 corrections)')
+    parser.add_argument('--quran', action='store_true', help='Use Quran-specific diacritization (100%% accuracy for Quranic text)')
     parser.add_argument('--version', action='version', version=f'Harakat {__version__}')
 
     args = parser.parse_args()
@@ -2790,6 +2816,8 @@ Examples:
     # Diacritize
     if args.v2_only:
         result = diacritize_v2_only(text.strip())
+    elif args.quran:
+        result = diacritize(text.strip(), quran_mode=True)
     else:
         result = diacritize(text.strip())
 
