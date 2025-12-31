@@ -36,7 +36,7 @@ demo = gr.Interface(
     title="حَرَكَات - Harakat",
     description="""**High-Accuracy Arabic Diacritization** | **تشكيل عربي عالي الدقة**
 
-📊 **2.29% DER** • **1.53% DER (no case)** • **7 MB** • **62x smaller than SOTA**
+📊 **2.29% DER** • **1.53% DER (no case)** • **6.7 MB** • **62x smaller than SOTA**
 
 📖 **99.997% Quran Accuracy** — Quranic text auto-detected
 
