@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harakat - Arabic Diacritization | حَرَكَات - التشكيل العربي</title>
-    <meta name="description" content="High-accuracy Arabic diacritization achieving 2.13% DER. Try it live - paste any Arabic text and see instant results.">
+    <meta name="description" content="High-accuracy Arabic diacritization achieving 2.29% DER with 99.997% Quran accuracy. Try it live - paste any Arabic text and see instant results.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -935,7 +935,7 @@
 
                     <div class="hero-stats">
                         <div class="stat-card">
-                            <div class="stat-value">2.13%</div>
+                            <div class="stat-value">2.29%</div>
                             <div class="stat-label en">Error Rate</div>
                             <div class="stat-label ar">نسبة الخطأ</div>
                         </div>
@@ -948,6 +948,11 @@
                             <div class="stat-value">73x</div>
                             <div class="stat-label en">Smaller than SOTA</div>
                             <div class="stat-label ar">أصغر من أفضل النماذج</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">99.997%</div>
+                            <div class="stat-label en">Quran Accuracy</div>
+                            <div class="stat-label ar">دقة القرآن</div>
                         </div>
                     </div>
                 </div>
@@ -998,6 +1003,7 @@
                             <h4 class="ar">جرب هذه الأمثلة</h4>
                             <div class="example-chips">
                                 <span class="example-chip" onclick="setExample('بسم الله الرحمن الرحيم')">بسم الله الرحمن الرحيم</span>
+                                <span class="example-chip" onclick="setExample('الحمد لله رب العالمين الرحمن الرحيم مالك يوم الدين')">الفاتحة</span>
                                 <span class="example-chip" onclick="setExample('العلم نور والجهل ظلام')">العلم نور والجهل ظلام</span>
                                 <span class="example-chip" onclick="setExample('من جد وجد ومن زرع حصد')">من جد وجد ومن زرع حصد</span>
                                 <span class="example-chip" onclick="setExample('ذهب الطالب الى المدرسة ليتعلم العلوم المفيدة')">ذهب الطالب الى المدرسة</span>
@@ -1054,10 +1060,10 @@
                     <div class="showcase-card-header">
                         <div class="showcase-icon">🕌</div>
                         <div>
-                            <h3 class="en">Religious Texts</h3>
-                            <h3 class="ar">النصوص الدينية</h3>
-                            <p class="en">Accurate voweling for Quranic and Islamic texts</p>
-                            <p class="ar">تشكيل دقيق للنصوص القرآنية والإسلامية</p>
+                            <h3 class="en">Quran & Religious Texts</h3>
+                            <h3 class="ar">القرآن والنصوص الدينية</h3>
+                            <p class="en">99.997% accuracy on Quranic text (auto-detected)</p>
+                            <p class="ar">دقة 99.997% للنص القرآني (يُكتشف تلقائياً)</p>
                         </div>
                     </div>
                     <div class="showcase-card-body">
