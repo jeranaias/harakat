@@ -15,7 +15,7 @@ setup(
     version="3.5.0",
     author="Jesse Morgan",
     author_email="jeranaias@gmail.com",
-    description="High-accuracy Arabic diacritization (1.71% DER)",
+    description="High-accuracy Arabic diacritization (2.13% DER)",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jeranaias/harakat",

@@ -7,7 +7,7 @@ Complete Arabic text diacritization with:
 - V3.5 Rule-based corrections (particles, anna, sunna)
 - V3.5 ML-based corrections (homograph disambiguation, voice correction)
 
-Performance: 1.71% DER on Tashkeela test set
+Performance: 2.13% DER on Tashkeela test set
 
 Usage:
     from harakat import diacritize

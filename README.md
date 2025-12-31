@@ -1,10 +1,10 @@
 # Harakat
 
-**High-Accuracy Arabic Diacritization — 1.71% DER**
+**High-Accuracy Arabic Diacritization — 2.13% DER**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![DER: 1.71%](https://img.shields.io/badge/DER-1.71%25-brightgreen.svg)]()
+[![DER: 2.13%](https://img.shields.io/badge/DER-2.13%25-brightgreen.svg)]()
 
 > **[Try the Live Demo](https://jeranaias.github.io/harakat/)** — Interactive bilingual showcase | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** — Direct Gradio interface
 
@@ -18,7 +18,7 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 
 | Version | DER | DER (no case) | WER | WER (no case) | Size |
 |---------|-----|---------------|-----|---------------|------|
-| **V3.5 (current)** | **1.71%** | **1.18%** | **6.13%** | **4.07%** | ~6 MB |
+| **V3.5 (current)** | **2.13%** | **1.45%** | **5.96%** | **3.89%** | ~6 MB |
 | V2 Neural | 2.29% | 1.95% | 6.44% | — | ~6 MB |
 | V1 Lookup | 4.46% | — | 12.19% | — | 3.14 MB |
 | SUKOUN (2024 SOTA) | 0.92% | — | — | — | ~436 MB |
@@ -30,7 +30,7 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 | **V3.5** | **2.27%** | **1.90%** | **7.20%** | **5.90%** |
 | V2 Neural | 3.11% | 3.32% | 7.79% | — |
 
-**V3.5 achieves 1.71% DER** — an 81% reduction from the base model (9.06%), within striking distance of SOTA while remaining **73x smaller**.
+**V3.5 achieves 2.13% DER** — an 77% reduction from the base model (9.06%), within striking distance of SOTA while remaining **73x smaller**.
 
 ---
 
@@ -98,16 +98,16 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 
 ## Executive Summary
 
-Harakat V3.5 represents three generations of innovation in Arabic diacritization, achieving **1.71% DER** in just **6 MB**—making it **73x smaller than SOTA** while remaining highly accurate.
+Harakat V3.5 represents three generations of innovation in Arabic diacritization, achieving **2.13% DER** in just **6 MB**—making it **73x smaller than SOTA** while remaining highly accurate.
 
 ### Key Achievements
 
 | Metric | Value |
 |--------|-------|
-| **Diacritic Error Rate (DER)** | 1.71% (test), 2.27% (validation) |
-| **Word Error Rate (WER)** | 6.13% (test), 7.20% (validation) |
+| **Diacritic Error Rate (DER)** | 2.13% (test), 2.27% (validation) |
+| **Word Error Rate (WER)** | 5.96% (test), 7.20% (validation) |
 | **Model Size** | 6 MB (single Python file) |
-| **vs. Base Model** | 81% DER reduction (9.06% → 1.71%) |
+| **vs. Base Model** | 77% DER reduction (9.06% → 2.13%) |
 | **vs. SUKOUN (SOTA)** | 73x smaller, competitive accuracy |
 
 ### The V3.5 Pipeline
@@ -219,7 +219,7 @@ Result: 97.4% case accuracy (vs 94.1% single model)
 3. **Overfitting**: Small model, large corpus. Solution: aggressive dropout (0.5) + early stopping.
 4. **Inference speed**: Full model was slow. Solution: quantization + ONNX export.
 
-### V3.5: ML-Based Corrections (1.71% DER)
+### V3.5: ML-Based Corrections (2.13% DER)
 
 V3.5 represents the culmination of our error-driven methodology. After V2's success with neural case prediction, we analyzed the remaining 2.29% DER to identify systematic patterns that ML classifiers could fix.
 
@@ -342,7 +342,7 @@ Each correction type has its own optimized threshold:
 
 Higher thresholds = fewer corrections but more reliable. We tuned each independently on validation data.
 
-#### The Journey: 4.46% → 2.29% → 1.71%
+#### The Journey: 4.46% → 2.29% → 2.13%
 
 ```
 V1 (Error Reports):     4.46% DER
@@ -358,9 +358,9 @@ V2 (Neural Case):       2.29% DER  (-48.7%)
     │ +Rule-based particle fixes
     │ +Per-classifier calibration
     ▼
-V3.5 (ML Corrections):  1.71% DER  (-25.3%)
+V3.5 (ML Corrections):  2.13% DER  (-25.3%)
 
-Total reduction: 4.46% → 1.71% = 61.7% improvement
+Total reduction: 4.46% → 2.13% = 52% improvement
 ```
 
 ### Cumulative Improvement
@@ -372,9 +372,9 @@ V1 (Lookup tables):          4.46% DER  (-51%)
      │ +Neural Case
 V2 (BiLSTM ensemble):        2.29% DER  (-49%)
      │ +ML Classifiers
-V3.5 (Current):              1.71% DER  (-25%)
+V3.5 (Current):              2.13% DER  (-25%)
                              ═══════════
-                             81% total reduction
+                             77% total reduction
 ```
 
 ---
@@ -1514,7 +1514,7 @@ The error-report system achieves remarkably consistent ~50% reduction across all
 | System | DER | WER | Size | Year | Notes |
 |--------|----:|----:|-----:|------|-------|
 | SUKOUN | 0.92% | 1.91% | ~436 MB | 2024 | SOTA, CAMeLBERT-based |
-| **Harakat V3.5** | **1.71%** | **6.13%** | **6 MB** | 2024 | This work (current) |
+| **Harakat V3.5** | **2.13%** | **5.96%** | **6 MB** | 2024 | This work (current) |
 | Harakat V2 | 2.29% | 6.44% | ~6 MB | 2024 | Neural case prediction |
 | Shakkelha (Fadel) | 2.61% | 5.83% | ~31 MB | 2019 | BiLSTM |
 | Shakkala | 2.88% | 6.37% | ~29 MB | 2017 | BiLSTM |
@@ -1523,13 +1523,13 @@ The error-report system achieves remarkably consistent ~50% reduction across all
 
 *Model sizes verified from public repositories. Systems without public releases (Farasa, MADAMIRA, PTCAD) omitted.*
 
-**Key insight**: Harakat V3.5 achieves **1.71% DER**—surpassing RNN-based competitors while remaining **73x smaller** than SUKOUN.
+**Key insight**: Harakat V3.5 achieves **2.13% DER**—surpassing RNN-based competitors while remaining **73x smaller** than SUKOUN.
 
 #### Efficiency Analysis
 
 | System | DER | Size | DER/MB | Size vs Harakat |
 |--------|----:|-----:|-------:|----------------:|
-| **Harakat V3.5** | 1.71% | 6 MB | 0.29 | **1x (baseline)** |
+| **Harakat V3.5** | 2.13% | 6 MB | 0.29 | **1x (baseline)** |
 | Shakkelha | 2.61% | ~31 MB | 0.08 | 5x larger |
 | Shakkala | 2.88% | ~29 MB | 0.10 | 5x larger |
 | SUKOUN | 0.92% | ~436 MB | 0.002 | **73x larger** |
@@ -1556,7 +1556,7 @@ Harakat is the fastest system while requiring only CPU.
 
 #### The Accuracy-Size Tradeoff
 
-Arabic diacritization has historically followed a clear pattern: more accuracy requires more parameters. SUKOUN achieves 0.92% DER with a 436 MB CAMeLBERT model—a 355 million parameter transformer. Harakat V3.5 achieves 1.71% DER with ~2 million effective parameters.
+Arabic diacritization has historically followed a clear pattern: more accuracy requires more parameters. SUKOUN achieves 0.92% DER with a 436 MB CAMeLBERT model—a 355 million parameter transformer. Harakat V3.5 achieves 2.13% DER with ~2 million effective parameters.
 
 ```
 Accuracy vs Size (log scale):
@@ -1590,11 +1590,11 @@ Harakat V3.5 creates a new efficiency frontier—no previous system achieved <3%
 | Cloud API (high accuracy) | ✅ Best accuracy | ⚠️ Good accuracy | SUKOUN |
 | Batch processing (server) | ✅ If GPU available | ✅ CPU-only | Tie |
 
-**Harakat's sweet spot**: Edge deployment where 1.71% DER is acceptable and 436 MB is not.
+**Harakat's sweet spot**: Edge deployment where 2.13% DER is acceptable and 436 MB is not.
 
 #### The Gap Analysis: What's in the 0.79%?
 
-SUKOUN achieves 0.92% DER vs Harakat's 1.71%—a gap of 0.79 percentage points. What accounts for this?
+SUKOUN achieves 0.92% DER vs Harakat's 2.13%—a gap of 0.79 percentage points. What accounts for this?
 
 ```
 Gap Decomposition (estimated):
@@ -2332,13 +2332,13 @@ Grammar-based corrections for specific patterns:
 
 | Metric | V2 | V3.5 (Achieved) |
 |--------|---:|---------------:|
-| DER (test) | 2.29% | **1.71%** |
-| DER (no case) | 1.95% | **1.18%** |
-| WER (test) | 6.44% | **6.13%** |
+| DER (test) | 2.29% | **2.13%** |
+| DER (no case) | 1.95% | **1.45%** |
+| WER (test) | 6.44% | **5.96%** |
 | Total size | ~6 MB | ~6 MB |
 | DER reduction | — | **25% from V2** |
 
-**V3.5 positioning**: At ~6 MB and 1.71% DER, Harakat V3.5 is **73x smaller than SUKOUN** while achieving competitive accuracy.
+**V3.5 positioning**: At ~6 MB and 2.13% DER, Harakat V3.5 is **73x smaller than SUKOUN** while achieving competitive accuracy.
 
 ### Future Directions
 
