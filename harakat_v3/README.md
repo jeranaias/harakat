@@ -1,6 +1,6 @@
 # Harakat V3.5 - ML-Based Error Correction
 
-**V3.5 achieves 1.71% DER** by adding machine learning classifiers and rule-based corrections on top of the V2 neural pipeline.
+**V3.5 achieves 2.13% DER** by adding machine learning classifiers and rule-based corrections on top of the V2 neural pipeline.
 
 ## Overview
 
@@ -75,7 +75,7 @@ Per-classifier threshold tuning:
 
 | Dataset | DER | DER (no case) | WER | WER (no case) |
 |---------|-----|---------------|-----|---------------|
-| Test | **1.71%** | 1.18% | 6.13% | 4.07% |
+| Test | **2.13%** | 1.45% | 5.96% | 3.89% |
 | Validation | **2.27%** | 1.90% | 7.20% | 5.90% |
 
 ### Version History
@@ -88,7 +88,7 @@ Per-classifier threshold tuning:
 | V3.2 | 1.96% | ML voice correction |
 | V3.3 | 1.95% | Anna fix |
 | V3.4 | 1.94% | Sunna fix |
-| **V3.5** | **1.71%** | Calibrated confidence |
+| **V3.5** | **2.13%** | Calibrated confidence |
 
 ---
 
