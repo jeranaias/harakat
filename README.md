@@ -18,7 +18,7 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 
 | Version | DER | DER (no case) | WER | WER (no case) | Size |
 |---------|-----|---------------|-----|---------------|------|
-| **V3.5 (current)** | **2.29%** | **1.53%** | **6.37%** | **4.11%** | ~6 MB |
+| **V3.5 (current)** | **2.29%** | **1.53%** | **6.37%** | **4.11%** | ~7 MB |
 | V2 Neural | 2.29% | 1.95% | 6.44% | — | ~6 MB |
 | V1 Lookup | 4.46% | — | 12.19% | — | 3.14 MB |
 | SUKOUN (2024 SOTA) | 0.92% | — | — | — | ~436 MB |
@@ -30,7 +30,7 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 | **V3.5** | **2.27%** | **1.90%** | **7.20%** | **5.90%** |
 | V2 Neural | 3.11% | 3.32% | 7.79% | — |
 
-**V3.5 achieves 2.29% DER** — a 75% reduction from the base model (9.06%), within striking distance of SOTA while remaining **73x smaller**.
+**V3.5 achieves 2.29% DER** — a 75% reduction from the base model (9.06%), within striking distance of SOTA while remaining **62x smaller**.
 
 ---
 
@@ -98,7 +98,7 @@ Harakat is a lightweight, offline-capable Arabic diacritization engine that achi
 
 ## Executive Summary
 
-Harakat V3.5 represents three generations of innovation in Arabic diacritization, achieving **2.29% DER** in just **6 MB**—making it **73x smaller than SOTA** while remaining highly accurate.
+Harakat V3.5 represents three generations of innovation in Arabic diacritization, achieving **2.29% DER** in just **7 MB**—making it **62x smaller than SOTA** while remaining highly accurate.
 
 ### Key Achievements
 
@@ -108,9 +108,9 @@ Harakat V3.5 represents three generations of innovation in Arabic diacritization
 | **DER without case endings** | 1.53% (test) |
 | **Word Error Rate (WER)** | 6.37% (test), 7.20% (validation) |
 | **Quran Accuracy** | **99.997%** (82,240/82,242 words) |
-| **Model Size** | 6 MB (single Python file) |
+| **Model Size** | 7 MB (single Python file) |
 | **vs. Base Model** | 75% DER reduction (9.06% → 2.29%) |
-| **vs. SUKOUN (SOTA)** | 73x smaller, competitive accuracy |
+| **vs. SUKOUN (SOTA)** | 62x smaller, competitive accuracy |
 
 ### The V3.5 Pipeline
 
@@ -237,7 +237,7 @@ V3.5 represents the culmination of our error-driven methodology, adding two majo
 - **Rule-Based Fixes**: Particle kasra, anna/sunna patterns
 - **Calibrated Thresholds**: Per-classifier confidence routing
 - **No-Case DER Improvement**: 1.95% → 1.53% (22% reduction in internal vowel errors)
-- **Size**: 6 MB (everything embedded in single Python file)
+- **Size**: 7 MB (everything embedded in single Python file)
 
 #### Error Analysis: What Remained After V2
 
@@ -1523,7 +1523,7 @@ The error-report system achieves remarkably consistent ~50% reduction across all
 | System | DER | WER | Size | Year | Notes |
 |--------|----:|----:|-----:|------|-------|
 | SUKOUN | 0.92% | 1.91% | ~436 MB | 2024 | SOTA, CAMeLBERT-based |
-| **Harakat V3.5** | **2.29%** | **6.37%** | **6 MB** | 2024 | This work (current) |
+| **Harakat V3.5** | **2.29%** | **6.37%** | **7 MB** | 2024 | This work (current) |
 | Harakat V2 | 2.29% | 6.44% | ~6 MB | 2024 | Neural case prediction |
 | Shakkelha (Fadel) | 2.61% | 5.83% | ~31 MB | 2019 | BiLSTM |
 | Shakkala | 2.88% | 6.37% | ~29 MB | 2017 | BiLSTM |
@@ -1532,23 +1532,23 @@ The error-report system achieves remarkably consistent ~50% reduction across all
 
 *Model sizes verified from public repositories. Systems without public releases (Farasa, MADAMIRA, PTCAD) omitted.*
 
-**Key insight**: Harakat V3.5 achieves **2.29% DER**—surpassing RNN-based competitors while remaining **73x smaller** than SUKOUN.
+**Key insight**: Harakat V3.5 achieves **2.29% DER**—surpassing RNN-based competitors while remaining **62x smaller** than SUKOUN.
 
 #### Efficiency Analysis
 
 | System | DER | Size | DER/MB | Size vs Harakat |
 |--------|----:|-----:|-------:|----------------:|
-| **Harakat V3.5** | 2.29% | 6 MB | 0.29 | **1x (baseline)** |
+| **Harakat V3.5** | 2.29% | 7 MB | 0.33 | **1x (baseline)** |
 | Shakkelha | 2.61% | ~31 MB | 0.08 | 5x larger |
 | Shakkala | 2.88% | ~29 MB | 0.10 | 5x larger |
-| SUKOUN | 0.92% | ~436 MB | 0.002 | **73x larger** |
+| SUKOUN | 0.92% | ~436 MB | 0.002 | **62x larger** |
 
 **Three tiers now exist in Arabic diacritization:**
-1. **Ultralight-tier**: ~6 MB, ~1.7% DER (**Harakat V3.5** — best efficiency)
+1. **Ultralight-tier**: ~7 MB, ~2.3% DER (**Harakat V3.5** — best efficiency)
 2. **RNN-tier**: ~30 MB, ~2.6-2.9% DER (Shakkala, Shakkelha)
 3. **BERT-tier**: ~436 MB, ~0.9% DER (SUKOUN, CAMeLBERT-based)
 
-**Harakat's breakthrough**: We've created a new tier that didn't exist before—achieving RNN-tier accuracy at 1/5th the size, and within striking distance of BERT-tier accuracy at 1/73rd the size.
+**Harakat's breakthrough**: We've created a new tier that didn't exist before—achieving RNN-tier accuracy at 1/4th the size, and within striking distance of BERT-tier accuracy at 1/62nd the size.
 
 #### Speed Comparison
 
@@ -2395,7 +2395,7 @@ Grammar-based corrections for specific patterns:
 | Total size | ~6 MB | ~6 MB |
 | DER reduction | — | **22% no-case improvement** |
 
-**V3.5 positioning**: At ~6 MB and 2.29% DER, Harakat V3.5 is **73x smaller than SUKOUN** while achieving competitive accuracy. Features **99.997% Quran accuracy** with embedded lookup.
+**V3.5 positioning**: At ~7 MB and 2.29% DER, Harakat V3.5 is **62x smaller than SUKOUN** while achieving competitive accuracy. Features **99.997% Quran accuracy** with embedded lookup.
 
 ### Future Directions
 
