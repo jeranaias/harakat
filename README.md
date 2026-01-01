@@ -1579,7 +1579,7 @@ DER%  │
       │            ● Shakkala (29 MB)
    3% │          ● Shakkelha (31 MB)
    2% │        ● Harakat V2 (6 MB)
-      │     ★ Harakat V3.5 (6 MB)  ← New efficiency frontier
+      │     ★ Harakat V3.5 (6.7 MB)  ← New efficiency frontier
    1% │                                      ● SUKOUN (436 MB)
       │
    0% ├──────────────────────────────────────────────────
@@ -1592,7 +1592,7 @@ Harakat V3.5 creates a new efficiency frontier—no previous system achieved <3%
 
 | Scenario | SUKOUN | Harakat V3.5 | Winner |
 |----------|--------|--------------|--------|
-| Mobile app (iOS/Android) | ❌ 436 MB download | ✅ 6 MB embedded | Harakat |
+| Mobile app (iOS/Android) | ❌ 436 MB download | ✅ 6.7 MB embedded | Harakat |
 | Browser/WebAssembly | ❌ Too large | ✅ Feasible | Harakat |
 | Raspberry Pi / IoT | ❌ OOM errors | ✅ Runs smoothly | Harakat |
 | Offline-first apps | ❌ Needs cloud | ✅ Fully offline | Harakat |
@@ -1662,7 +1662,7 @@ Arabic Diacritization Evolution:
        └── SUKOUN achieves 0.92% DER
        └── Models: 400+ MB
 
-2024: Efficiency frontier (1.7% DER @ 6 MB)
+2024: Efficiency frontier (2.29% DER @ 6.7 MB)
        └── Harakat V3.5 proves small can be accurate
        └── Error-driven methodology scales
        └── New deployment possibilities
@@ -1678,7 +1678,7 @@ Harakat represents a different path—not bigger models, but smarter engineering
 
 - **Python**: 3.8 or higher
 - **Memory**: ~100 MB runtime footprint
-- **Disk**: 6 MB (single-file distribution)
+- **Disk**: 6.7 MB (single-file distribution)
 - **Dependencies**: PyTorch, NumPy, scikit-learn
 
 ### Quick Start (30 seconds)
@@ -1710,7 +1710,7 @@ python harakat.py --version
 
 #### Option 2: Single-File Download
 
-The entire V3.5 system is embedded in a single 6 MB Python file:
+The entire V3.5 system is embedded in a single 6.7 MB Python file:
 
 ```bash
 # Download harakat.py from releases
@@ -2069,7 +2069,7 @@ print(f"WER: {metrics['wer']:.2%}")
 Harakat is distributed as a single Python file with embedded model data:
 
 ```
-harakat.py (6.6 MB uncompressed, 3.14 MB LZMA compressed)
+harakat.py (6.7 MB uncompressed, ~5 MB LZMA compressed)
 ├── Module docstring and metadata (lines 1-50)
 ├── Import statements (lines 51-60)
 ├── Configuration constants (lines 61-100)
@@ -2103,7 +2103,7 @@ harakat.py (6.6 MB uncompressed, 3.14 MB LZMA compressed)
 | Error reports | 1.5 MB | 0.9 MB | 29% |
 | Blacklist | 0.2 MB | 0.1 MB | 3% |
 | Code | 0.2 MB | 0.2 MB | 8% |
-| **Total** | **6.6 MB** | **3.14 MB** | **100%** |
+| **Total** | **6.7 MB** | **~5 MB** | **100%** |
 
 ### Performance Characteristics
 
@@ -2392,7 +2392,7 @@ Grammar-based corrections for specific patterns:
 | DER (test) | 2.29% | **2.29%** |
 | DER (no case) | 1.95% | **1.53%** |
 | WER (test) | 6.44% | **6.37%** |
-| Total size | ~6 MB | ~6 MB |
+| Total size | ~6 MB | 6.7 MB |
 | DER reduction | — | **22% no-case improvement** |
 
 **V3.5 positioning**: At ~6.7 MB and 2.29% DER, Harakat V3.5 is **62x smaller than SUKOUN** while achieving competitive accuracy. Features **99.997% Quran accuracy** with embedded lookup.
