@@ -450,7 +450,7 @@ Version 7 looked incredible on paper. The training curves were beautiful—loss 
 
 Then I tested it on held-out data from a different source. Complete failure. The model had memorized the training corpus rather than learning generalizable patterns. Classic overfitting, but at a scale I hadn't anticipated.
 
-The LSTM had learned that "sentence 47,382 in the training set gets this diacritization," not "Arabic words following this pattern get this diacritization." It was a expensive lookup table with extra steps.
+The LSTM had learned that "sentence 47,382 in the training set gets this diacritization," not "Arabic words following this pattern get this diacritization." It was an expensive lookup table with extra steps.
 
 I had to throw away weeks of work and start fresh with a philosophy of aggressive generalization:
 
@@ -1793,7 +1793,7 @@ Options:
   -f, --file FILE       Read input from file
   -o, --output FILE     Write output to file
   --stdin               Read from standard input
-  --quran               Use Quran-specific diacritization (99.9976% accuracy)
+  --quran               Use Quran-specific diacritization (99.997% accuracy)
   --v2-only             Use V2 pipeline only (skip V3.5 corrections)
   --version             Show version number
   -h, --help            Show help message
@@ -2628,7 +2628,7 @@ If you use Harakat in your research, please cite:
   title = {Harakat: Error-Corrective Arabic Diacritization via Meta-Learning on Base Model Failures},
   year = {2024},
   url = {https://github.com/jeranaias/harakat},
-  note = {High-accuracy Arabic diacritization in 3.14 MB}
+  note = {High-accuracy Arabic diacritization in 6.7 MB}
 }
 ```
 
@@ -2914,7 +2914,7 @@ Output: (correction, confidence) or (NULL, 0)
 
 ---
 
-**Harakat** — High-accuracy Arabic diacritization in 3.14 MB.
+**Harakat** — High-accuracy Arabic diacritization in 6.7 MB.
 
 Built with determination in San Mateo, California.
 
