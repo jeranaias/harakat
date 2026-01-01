@@ -18,6 +18,10 @@
 
 > **[Try the Live Demo](https://jeranaias.github.io/harakat/)** | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** | **[Run in Colab](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)**
 
+<p align="center">
+  <img src="docs/demo.svg" alt="Harakat Demo" width="700">
+</p>
+
 ---
 
 Harakat is a lightweight, offline-capable Arabic diacritization engine that achieves state-of-the-art accuracy while remaining small enough to run on any device. Built from scratch by a single developer, it demonstrates that careful engineering and novel methodologies can compete with billion-parameter models at a fraction of the size.
