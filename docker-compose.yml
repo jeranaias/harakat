@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  harakat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: harakat:latest
+    container_name: harakat
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    # Run as API server
+    command: ["--serve"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "from harakat import diacritize; print(diacritize('test'))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Development service with live reload
+  harakat-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: harakat:dev
+    container_name: harakat-dev
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./harakat.py:/app/harakat.py:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["--serve"]
+    profiles:
+      - dev
