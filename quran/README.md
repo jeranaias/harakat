@@ -1,6 +1,6 @@
 # Quran Diacritization Module
 
-This module provides **99.9976% accurate** diacritization for Quranic text using a pre-built lookup table from the authentic Uthmani Quran.
+This module provides **99.997% accurate** diacritization for Quranic text using a pre-built lookup table from the authentic Uthmani Quran.
 
 ## Features
 
@@ -36,7 +36,7 @@ python harakat.py --quran "بسم الله الرحمن الرحيم"
 
 ## Accuracy
 
-- **99.9976%** word-level accuracy on the full Quran (82,242 words)
+- **99.997%** word-level accuracy on the full Quran (82,242 words)
 - Only 2 ambiguous cases where different ayahs share the same undiacritized text
 - Both "errors" are valid Quranic diacritizations from different surahs
 
