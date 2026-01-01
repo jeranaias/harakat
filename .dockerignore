@@ -1,0 +1,55 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info
+dist
+build
+eggs
+*.manifest
+*.spec
+
+# Virtual environments
+venv
+env
+.venv
+.env
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Testing
+.pytest_cache
+.coverage
+htmlcov
+.tox
+
+# Documentation
+docs
+*.md
+!README.md
+
+# Development files
+experiments
+benchmarks
+tests
+examples
+*.ipynb
+
+# CI/CD
+.github
+
+# Other
+.DS_Store
+Thumbs.db
+*.log
