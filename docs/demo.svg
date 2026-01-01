@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap');
+      .terminal { fill: #1a1b26; }
+      .title { font-family: 'Fira Code', monospace; font-size: 18px; fill: #7aa2f7; font-weight: 600; }
+      .prompt { font-family: 'Fira Code', monospace; font-size: 14px; fill: #9ece6a; }
+      .command { font-family: 'Fira Code', monospace; font-size: 14px; fill: #c0caf5; }
+      .label { font-family: 'Fira Code', monospace; font-size: 13px; fill: #bb9af7; }
+      .arabic { font-family: 'Amiri', 'Noto Naskh Arabic', serif; font-size: 20px; fill: #7dcfff; direction: rtl; }
+      .output { font-family: 'Amiri', 'Noto Naskh Arabic', serif; font-size: 20px; fill: #9ece6a; direction: rtl; font-weight: 600; }
+      .stat { font-family: 'Fira Code', monospace; font-size: 12px; fill: #565f89; }
+      .highlight { fill: #f7768e; }
+    </style>
+  </defs>
+
+  <!-- Terminal Background -->
+  <rect class="terminal" width="800" height="400" rx="10"/>
+
+  <!-- Window Controls -->
+  <circle cx="25" cy="20" r="6" fill="#f7768e"/>
+  <circle cx="45" cy="20" r="6" fill="#e0af68"/>
+  <circle cx="65" cy="20" r="6" fill="#9ece6a"/>
+
+  <!-- Title Bar -->
+  <text class="title" x="400" y="25" text-anchor="middle">Harakat - Arabic Diacritization</text>
+
+  <!-- Example 1: Basmala -->
+  <g>
+    <text class="prompt" x="20" y="70">$</text>
+    <text class="command" x="35" y="70">python harakat.py "بسم الله الرحمن الرحيم"</text>
+
+    <text class="label" x="20" y="100">Input:</text>
+    <text class="arabic" x="780" y="100" text-anchor="end">بسم الله الرحمن الرحيم</text>
+
+    <text class="label" x="20" y="130">Output:</text>
+    <text class="output" x="780" y="130" text-anchor="end">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</text>
+    <animate attributeName="opacity" values="0;0;1;1" dur="4s" repeatCount="indefinite" keyTimes="0;0.2;0.25;1"/>
+  </g>
+
+  <!-- Example 2: Proverb -->
+  <g>
+    <text class="prompt" x="20" y="180">$</text>
+    <text class="command" x="35" y="180">python harakat.py "العلم نور والجهل ظلام"</text>
+
+    <text class="label" x="20" y="210">Input:</text>
+    <text class="arabic" x="780" y="210" text-anchor="end">العلم نور والجهل ظلام</text>
+
+    <text class="label" x="20" y="240">Output:</text>
+    <text class="output" x="780" y="240" text-anchor="end">الْعِلْمُ نُورٌ وَالْجَهْلُ ظَلَامٌ</text>
+    <animate attributeName="opacity" values="0;0;0;1;1" dur="4s" repeatCount="indefinite" keyTimes="0;0.4;0.45;0.5;1"/>
+  </g>
+
+  <!-- Example 3: Education -->
+  <g>
+    <text class="prompt" x="20" y="290">$</text>
+    <text class="command" x="35" y="290">python harakat.py "ذهب الطالب الى المدرسة"</text>
+
+    <text class="label" x="20" y="320">Input:</text>
+    <text class="arabic" x="780" y="320" text-anchor="end">ذهب الطالب الى المدرسة</text>
+
+    <text class="label" x="20" y="350">Output:</text>
+    <text class="output" x="780" y="350" text-anchor="end">ذَهَبَ الطَّالِبُ إِلَى الْمَدْرَسَةِ</text>
+    <animate attributeName="opacity" values="0;0;0;0;1;1" dur="4s" repeatCount="indefinite" keyTimes="0;0.6;0.65;0.7;0.75;1"/>
+  </g>
+
+  <!-- Stats Bar -->
+  <rect x="0" y="375" width="800" height="25" fill="#24283b"/>
+  <text class="stat" x="20" y="392">2.29% DER</text>
+  <text class="stat" x="120" y="392">|</text>
+  <text class="stat" x="140" y="392">99.997% Quran</text>
+  <text class="stat" x="280" y="392">|</text>
+  <text class="stat" x="300" y="392">6.7 MB</text>
+  <text class="stat" x="380" y="392">|</text>
+  <text class="stat" x="400" y="392">62x smaller than SOTA</text>
+  <text class="stat" x="600" y="392">|</text>
+  <text class="stat" x="620" y="392" fill="#7aa2f7">github.com/jeranaias/harakat</text>
+</svg>
