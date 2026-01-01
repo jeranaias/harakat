@@ -19,7 +19,7 @@
 > **[Try the Live Demo](https://jeranaias.github.io/harakat/)** | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** | **[Run in Colab](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)**
 
 <p align="center">
-  <img src="docs/demo.svg" alt="Harakat Demo" width="700">
+  <img src="docs/demo.gif" alt="Harakat Demo" width="700">
 </p>
 
 ---
