@@ -1,12 +1,22 @@
 # Harakat
 
-**High-Accuracy Arabic Diacritization — 2.29% DER**
+**High-Accuracy Arabic Diacritization — 2.29% DER | 99.997% Quran Accuracy**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![DER: 2.29%](https://img.shields.io/badge/DER-2.29%25-brightgreen.svg)]()
+[![CI](https://github.com/jeranaias/harakat/actions/workflows/ci.yml/badge.svg)](https://github.com/jeranaias/harakat/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/jeranaias/harakat/branch/main/graph/badge.svg)](https://codecov.io/gh/jeranaias/harakat)
 
-> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** — Interactive bilingual showcase | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** — Direct Gradio interface
+[![DER: 2.29%](https://img.shields.io/badge/DER-2.29%25-brightgreen.svg)]()
+[![Quran: 99.997%](https://img.shields.io/badge/Quran-99.997%25-gold.svg)]()
+[![Model Size](https://img.shields.io/badge/Size-6.7MB-blue.svg)]()
+[![62x Smaller](https://img.shields.io/badge/vs_SOTA-62x_smaller-blueviolet.svg)]()
+
+[![Live Demo](https://img.shields.io/badge/Demo-Live-success.svg)](https://jeranaias.github.io/harakat/)
+[![HuggingFace Space](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace_Space-orange.svg)](https://huggingface.co/spaces/jcmguy/harakat)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)
+
+> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** | **[Run in Colab](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)**
 
 ---
 
