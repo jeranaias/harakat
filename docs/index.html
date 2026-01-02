@@ -291,11 +291,20 @@
             padding: 20px;
             border-radius: 12px;
             font-size: 22px;
-            font-family: 'Amiri', serif;
+            font-family: 'Noto Naskh Arabic', 'Inter', sans-serif;
             direction: rtl;
             text-align: right;
             line-height: 2;
             resize: vertical;
+        }
+
+        .demo-output.loading {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gray-light);
+            direction: ltr;
+            text-align: center;
         }
 
         .demo-input {
@@ -1377,17 +1386,20 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
             const output = document.getElementById('main-output');
             const btn = document.getElementById('diacritize-btn');
 
-            if (!input) { output.textContent = ''; return; }
+            if (!input) { output.textContent = ''; output.classList.remove('loading'); return; }
 
             btn.disabled = true;
             btn.innerHTML = '<span class="spinner"></span> ' + t('processing');
             output.textContent = t('diacritizing');
+            output.classList.add('loading');
 
             try {
                 const result = await callAPI(input);
                 output.textContent = result;
+                output.classList.remove('loading');
             } catch (e) {
                 output.innerHTML = '<span style="color: #ef4444;">' + t('error') + ': ' + e.message + '</span>';
+                output.classList.remove('loading');
             }
 
             btn.disabled = false;
@@ -1456,7 +1468,9 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
 
         function clearMain() {
             document.getElementById('main-input').value = '';
-            document.getElementById('main-output').textContent = '';
+            const output = document.getElementById('main-output');
+            output.textContent = '';
+            output.classList.remove('loading');
         }
 
         function copyOutput() {
