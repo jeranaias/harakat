@@ -9,7 +9,15 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from PIL import Image, ImageDraw, ImageFont
+import arabic_reshaper
+from bidi.algorithm import get_display
 from harakat import diacritize
+
+
+def shape_arabic(text):
+    """Reshape Arabic text for proper connected letter display"""
+    reshaped = arabic_reshaper.reshape(text)
+    return get_display(reshaped)
 
 # Configuration
 WIDTH = 800
@@ -95,10 +103,11 @@ def create_frame(examples, current_example, show_output, mono_font, arabic_font,
         # Calculate width of prefix to position Arabic text
         prefix_bbox = draw.textbbox((0, 0), cmd_prefix, font=mono_font)
         prefix_width = prefix_bbox[2] - prefix_bbox[0]
-        # Draw Arabic with proper font
-        draw.text((35 + prefix_width, y), arabic, font=cmd_arabic_font, fill=COMMAND_COLOR)
+        # Draw Arabic with proper font (shaped for connected letters)
+        shaped_cmd_arabic = shape_arabic(arabic)
+        draw.text((35 + prefix_width, y), shaped_cmd_arabic, font=cmd_arabic_font, fill=COMMAND_COLOR)
         # Calculate Arabic width and add closing quote
-        arabic_bbox = draw.textbbox((0, 0), arabic, font=cmd_arabic_font)
+        arabic_bbox = draw.textbbox((0, 0), shaped_cmd_arabic, font=cmd_arabic_font)
         arabic_width = arabic_bbox[2] - arabic_bbox[0]
         draw.text((35 + prefix_width + arabic_width, y), '"', font=mono_font, fill=COMMAND_COLOR)
         y += 25
@@ -106,14 +115,14 @@ def create_frame(examples, current_example, show_output, mono_font, arabic_font,
         if i < current_example or (i == current_example and show_output):
             # Input label
             draw.text((20, y), "Input:", font=mono_font, fill=LABEL_COLOR)
-            # Arabic text (right-to-left)
-            draw.text((WIDTH - 30, y), arabic, font=arabic_font, fill=ARABIC_COLOR, anchor="ra")
+            # Arabic text (right-to-left, shaped for connected letters)
+            draw.text((WIDTH - 30, y), shape_arabic(arabic), font=arabic_font, fill=ARABIC_COLOR, anchor="ra")
             y += 30
 
             # Output label
             draw.text((20, y), "Output:", font=mono_font, fill=LABEL_COLOR)
-            # Diacritized text
-            draw.text((WIDTH - 30, y), output, font=arabic_font, fill=OUTPUT_COLOR, anchor="ra")
+            # Diacritized text (shaped for connected letters)
+            draw.text((WIDTH - 30, y), shape_arabic(output), font=arabic_font, fill=OUTPUT_COLOR, anchor="ra")
             y += 35
         else:
             y += 65
