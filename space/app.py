@@ -18,7 +18,7 @@ from harakat import diacritize
 # =============================================================================
 
 API_TITLE = "Harakat API"
-API_VERSION = "3.5.0"
+API_VERSION = "3.5.1"
 API_DESCRIPTION = """
 # Harakat - High-Accuracy Arabic Diacritization API
 

@@ -24,7 +24,7 @@ FROM python:3.11-slim
 
 LABEL maintainer="Jesse Morgan <jeranaias@gmail.com>"
 LABEL description="Harakat: High-accuracy Arabic diacritization (2.29% DER, 99.997% Quran)"
-LABEL version="3.5.0"
+LABEL version="3.5.1"
 
 WORKDIR /app
 
