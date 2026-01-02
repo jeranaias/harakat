@@ -468,11 +468,41 @@
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.3s;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardEntrance 0.6s ease-out forwards;
+        }
+
+        .showcase-card:nth-child(1) { animation-delay: 0.1s; }
+        .showcase-card:nth-child(2) { animation-delay: 0.2s; }
+        .showcase-card:nth-child(3) { animation-delay: 0.3s; }
+        .showcase-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardEntrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .showcase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-3);
+            transform: scaleX(0);
+            transition: transform 0.3s;
         }
 
         .showcase-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .showcase-card:hover::before {
+            transform: scaleX(1);
         }
 
         .showcase-card-header {
@@ -492,6 +522,12 @@
             align-items: center;
             justify-content: center;
             font-size: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-card:hover .showcase-icon {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
 
         .showcase-card-header h3 {
@@ -578,8 +614,51 @@
 
         .showcase-arrow {
             text-align: center;
-            color: var(--gray);
+            color: var(--primary);
             padding: 8px;
+            font-size: 18px;
+            animation: arrowPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(3px); opacity: 1; }
+        }
+
+        .showcase-output-wrapper {
+            position: relative;
+        }
+
+        .showcase-copy-btn {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--gray-light);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .showcase-output-wrapper:hover .showcase-copy-btn {
+            opacity: 1;
+        }
+
+        .showcase-copy-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .showcase-copy-btn.copied {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
         }
 
         .showcase-output {
@@ -595,6 +674,17 @@
             line-height: 1.8;
             min-height: 60px;
             font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-output.success {
+            animation: outputGlow 0.6s ease-out;
+        }
+
+        @keyframes outputGlow {
+            0% { box-shadow: 0 0 0 rgba(16, 185, 129, 0); transform: scale(1); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transform: scale(1.01); }
+            100% { box-shadow: 0 0 0 rgba(16, 185, 129, 0); transform: scale(1); }
         }
 
         .showcase-output.placeholder,
@@ -1096,23 +1186,26 @@
                     <div class="showcase-card-header">
                         <div class="showcase-icon">📚</div>
                         <div>
-                            <h3 class="en">Education & Learning</h3>
-                            <h3 class="ar">التعليم والتعلم</h3>
-                            <p class="en">Help students learn proper Arabic pronunciation</p>
-                            <p class="ar">ساعد الطلاب على تعلم النطق العربي الصحيح</p>
+                            <h3 class="en">Education & E-Learning</h3>
+                            <h3 class="ar">التعليم الإلكتروني</h3>
+                            <p class="en">Perfect for textbooks, worksheets & learning apps</p>
+                            <p class="ar">مثالي للكتب المدرسية وتطبيقات التعلم</p>
                         </div>
                     </div>
                     <div class="showcase-card-body">
                         <div class="showcase-demo">
                             <div class="showcase-demo-header">
-                                <span class="showcase-demo-title en-inline">education_demo.py</span>
-                                <span class="showcase-demo-title ar-inline">عرض_التعليم.py</span>
+                                <span class="showcase-demo-title en-inline">textbook_processor.py</span>
+                                <span class="showcase-demo-title ar-inline">معالج_الكتب.py</span>
                                 <button class="showcase-demo-btn" onclick="runShowcase('edu')"><span class="en-inline">Run</span><span class="ar-inline">تشغيل</span></button>
                             </div>
                             <div class="showcase-demo-content">
-                                <textarea class="showcase-input" id="edu-input" rows="2">الطالب يقرا الكتاب في المكتبة</textarea>
-                                <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output placeholder" id="edu-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <textarea class="showcase-input" id="edu-input" rows="2">العلم نور والجهل ظلام فاطلبوا العلم من المهد الى اللحد</textarea>
+                                <div class="showcase-arrow">⬇</div>
+                                <div class="showcase-output-wrapper">
+                                    <div class="showcase-output placeholder" id="edu-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                    <button class="showcase-copy-btn" onclick="copyShowcase('edu')">Copy</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1123,23 +1216,26 @@
                     <div class="showcase-card-header">
                         <div class="showcase-icon">🕌</div>
                         <div>
-                            <h3 class="en">Quran & Religious Texts</h3>
-                            <h3 class="ar">القرآن والنصوص الدينية</h3>
-                            <p class="en">99.997% accuracy on Quranic text (auto-detected)</p>
-                            <p class="ar">دقة 99.997% للنص القرآني (يُكتشف تلقائياً)</p>
+                            <h3 class="en">Quran & Islamic Texts</h3>
+                            <h3 class="ar">القرآن والنصوص الإسلامية</h3>
+                            <p class="en">99.997% Quran accuracy with auto-detection</p>
+                            <p class="ar">دقة 99.997% مع الكشف التلقائي</p>
                         </div>
                     </div>
                     <div class="showcase-card-body">
                         <div class="showcase-demo">
                             <div class="showcase-demo-header">
-                                <span class="showcase-demo-title en-inline">religious_demo.py</span>
-                                <span class="showcase-demo-title ar-inline">عرض_ديني.py</span>
+                                <span class="showcase-demo-title en-inline">quran_reader.py</span>
+                                <span class="showcase-demo-title ar-inline">قارئ_القرآن.py</span>
                                 <button class="showcase-demo-btn" onclick="runShowcase('religious')"><span class="en-inline">Run</span><span class="ar-inline">تشغيل</span></button>
                             </div>
                             <div class="showcase-demo-content">
-                                <textarea class="showcase-input" id="religious-input" rows="2">قل هو الله احد الله الصمد</textarea>
-                                <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output placeholder" id="religious-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <textarea class="showcase-input" id="religious-input" rows="2">انا انزلناه في ليلة القدر وما ادراك ما ليلة القدر</textarea>
+                                <div class="showcase-arrow">⬇</div>
+                                <div class="showcase-output-wrapper">
+                                    <div class="showcase-output placeholder" id="religious-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                    <button class="showcase-copy-btn" onclick="copyShowcase('religious')">Copy</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1148,25 +1244,28 @@
                 <!-- Text-to-Speech -->
                 <div class="showcase-card">
                     <div class="showcase-card-header">
-                        <div class="showcase-icon">🗣️</div>
+                        <div class="showcase-icon">🎙️</div>
                         <div>
-                            <h3 class="en">Text-to-Speech Prep</h3>
-                            <h3 class="ar">تجهيز النص للصوت</h3>
-                            <p class="en">Prepare text for accurate speech synthesis</p>
-                            <p class="ar">جهز النص للتركيب الصوتي الدقيق</p>
+                            <h3 class="en">Speech Synthesis</h3>
+                            <h3 class="ar">التركيب الصوتي</h3>
+                            <p class="en">Essential preprocessing for Arabic TTS engines</p>
+                            <p class="ar">معالجة أساسية لمحركات النطق العربي</p>
                         </div>
                     </div>
                     <div class="showcase-card-body">
                         <div class="showcase-demo">
                             <div class="showcase-demo-header">
-                                <span class="showcase-demo-title en-inline">tts_prep.py</span>
-                                <span class="showcase-demo-title ar-inline">تجهيز_صوتي.py</span>
+                                <span class="showcase-demo-title en-inline">tts_pipeline.py</span>
+                                <span class="showcase-demo-title ar-inline">خط_الصوت.py</span>
                                 <button class="showcase-demo-btn" onclick="runShowcase('tts')"><span class="en-inline">Run</span><span class="ar-inline">تشغيل</span></button>
                             </div>
                             <div class="showcase-demo-content">
-                                <textarea class="showcase-input" id="tts-input" rows="2">مرحبا بكم في تطبيقنا الجديد</textarea>
-                                <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output placeholder" id="tts-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <textarea class="showcase-input" id="tts-input" rows="2">من جد وجد ومن زرع حصد ومن سار على الدرب وصل</textarea>
+                                <div class="showcase-arrow">⬇</div>
+                                <div class="showcase-output-wrapper">
+                                    <div class="showcase-output placeholder" id="tts-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                    <button class="showcase-copy-btn" onclick="copyShowcase('tts')">Copy</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1177,23 +1276,26 @@
                     <div class="showcase-card-header">
                         <div class="showcase-icon">📰</div>
                         <div>
-                            <h3 class="en">Publishing & Media</h3>
-                            <h3 class="ar">النشر والإعلام</h3>
-                            <p class="en">Diacritize articles, books, and news content</p>
-                            <p class="ar">شكل المقالات والكتب والأخبار</p>
+                            <h3 class="en">Digital Publishing</h3>
+                            <h3 class="ar">النشر الرقمي</h3>
+                            <p class="en">News, books, articles & content at scale</p>
+                            <p class="ar">الأخبار والكتب والمقالات بكميات كبيرة</p>
                         </div>
                     </div>
                     <div class="showcase-card-body">
                         <div class="showcase-demo">
                             <div class="showcase-demo-header">
-                                <span class="showcase-demo-title en-inline">publishing.py</span>
-                                <span class="showcase-demo-title ar-inline">نشر.py</span>
+                                <span class="showcase-demo-title en-inline">content_processor.py</span>
+                                <span class="showcase-demo-title ar-inline">معالج_المحتوى.py</span>
                                 <button class="showcase-demo-btn" onclick="runShowcase('pub')"><span class="en-inline">Run</span><span class="ar-inline">تشغيل</span></button>
                             </div>
                             <div class="showcase-demo-content">
-                                <textarea class="showcase-input" id="pub-input" rows="2">اعلنت الحكومة عن خطة جديدة لتطوير التعليم</textarea>
-                                <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output placeholder" id="pub-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <textarea class="showcase-input" id="pub-input" rows="2">اطلقت الشركة منتجها الجديد الذي يعتمد على الذكاء الاصطناعي</textarea>
+                                <div class="showcase-arrow">⬇</div>
+                                <div class="showcase-output-wrapper">
+                                    <div class="showcase-output placeholder" id="pub-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                    <button class="showcase-copy-btn" onclick="copyShowcase('pub')">Copy</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1414,21 +1516,29 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
         async function runShowcase(id) {
             const input = document.getElementById(id + '-input').value.trim();
             const output = document.getElementById(id + '-output');
+            const btn = output.closest('.showcase-demo').querySelector('.showcase-demo-btn');
+            const originalBtnText = btn.innerHTML;
 
             if (!input) return;
 
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner" style="width:14px;height:14px;border-width:2px;"></span>';
             output.textContent = t('diacritizing');
-            output.classList.remove('placeholder');
+            output.classList.remove('placeholder', 'success');
             output.classList.add('loading');
 
             try {
                 const result = await callAPI(input);
                 output.textContent = result;
                 output.classList.remove('loading');
+                output.classList.add('success');
             } catch (e) {
                 output.innerHTML = '<span style="color: #ef4444;">' + t('error') + ': ' + e.message + '</span>';
                 output.classList.remove('loading');
             }
+
+            btn.disabled = false;
+            btn.innerHTML = originalBtnText;
         }
 
         async function callAPI(text) {
@@ -1484,6 +1594,22 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
             if (output && !output.includes(t('error'))) {
                 navigator.clipboard.writeText(output);
                 alert(t('copied'));
+            }
+        }
+
+        function copyShowcase(id) {
+            const output = document.getElementById(id + '-output');
+            const text = output.textContent;
+            const btn = output.parentElement.querySelector('.showcase-copy-btn');
+
+            if (text && !text.includes(t('error')) && !output.classList.contains('placeholder')) {
+                navigator.clipboard.writeText(text);
+                btn.textContent = t('copiedBtn');
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = t('copyBtn');
+                    btn.classList.remove('copied');
+                }, 2000);
             }
         }
 
