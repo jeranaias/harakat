@@ -232,7 +232,7 @@ class HealthResponse(BaseModel):
             "example": {
                 "status": "healthy",
                 "service": "Harakat API",
-                "version": "3.5.0",
+                "version": "3.5.1",
                 "model_size": "6.7 MB",
                 "metrics": {
                     "der": "2.29%",
