@@ -128,16 +128,26 @@
         }
 
         .hero-badge {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: var(--glass);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             padding: 8px 16px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--primary-light);
-            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body.rtl .hero-badge {
+            left: auto;
+            right: 20px;
         }
 
         .hero-badge .dot {
@@ -955,15 +965,16 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
+                <!-- Floating badge top left -->
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    <span class="en-inline">Live Diacritization Engine</span>
+                    <span class="ar-inline">محرك التشكيل المباشر</span>
+                </div>
+
                 <div class="hero-header">
                     <!-- Beautiful Arabic Title -->
                     <div class="arabic-title">حَرَكَاتْ</div>
-
-                    <div class="hero-badge">
-                        <span class="dot"></span>
-                        <span class="en-inline">Live Diacritization Engine</span>
-                        <span class="ar-inline">محرك التشكيل المباشر</span>
-                    </div>
                     <h1 class="en">Arabic Diacritization <span class="highlight">That Actually Works</span></h1>
                     <h1 class="ar">التشكيل العربي <span class="highlight">الذي يعمل فعلاً</span></h1>
                     <p class="hero-subtitle en">Paste any Arabic text below. No limits, no signup, no fake demos. Real neural network diacritization running live.</p>
