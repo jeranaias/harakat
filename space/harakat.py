@@ -1429,6 +1429,11 @@ WORD_OVERRIDES = {
     ('من', 'حاكم'): 'مِنْ',  # 3 fixes - "from/except" preposition
     ('من', 'تحمل'): 'مَنْ',  # 2 fixes - "who carries" relative pronoun
 
+    # Famous proverb: من جدّ وجد ومن زرع حصد (Whoever strives, finds; whoever sows, reaps)
+    ('من', 'جد'): 'مَنْ',  # "whoever" not "from"
+    ('جد', 'وجد'): 'جَدَّ',  # "strived" not "grandfather"
+    ('وجد', 'ومن'): 'وَجَدَ',  # active "found" not passive "was found"
+
     # Added from real_errors.txt analysis (Experiment 13)
     # Only patterns verified as 100% consistent (no gold variation)
     ('منتقى', '('): 'مُنْتَقًى',  # 3 fixes - tanween fatha
