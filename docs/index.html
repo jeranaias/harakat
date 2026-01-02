@@ -104,7 +104,7 @@
         .hero-content {
             position: relative;
             z-index: 10;
-            padding: 100px 0;
+            padding: 60px 0 100px 0;
             width: 100%;
         }
 
@@ -114,22 +114,16 @@
         }
 
         .arabic-title {
-            font-family: 'Amiri', serif;
-            font-size: 72px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 60px rgba(79, 172, 254, 0.3);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 100px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 8px;
+            text-shadow:
+                0 0 40px rgba(255, 255, 255, 0.4),
+                0 0 80px rgba(79, 172, 254, 0.3),
+                0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .hero-badge {
@@ -759,9 +753,9 @@
                 margin-bottom: 16px;
             }
             .arabic-title {
-                font-size: 48px;
-                letter-spacing: 2px;
-                margin-bottom: 12px;
+                font-size: 64px;
+                letter-spacing: 4px;
+                margin-bottom: 8px;
             }
             .hero h1 {
                 font-size: 28px;
@@ -901,7 +895,7 @@
 
         /* Extra small screens */
         @media (max-width: 380px) {
-            .arabic-title { font-size: 40px; }
+            .arabic-title { font-size: 52px; letter-spacing: 2px; }
             .hero h1 { font-size: 24px; }
             .stat-card { min-width: 80px; padding: 10px 12px; }
             .stat-value { font-size: 18px; }
