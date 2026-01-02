@@ -8,24 +8,57 @@ sdk_version: "4.44.0"
 app_file: app.py
 pinned: false
 license: mit
-short_description: High-accuracy Arabic diacritization (2.13% DER)
+short_description: High-accuracy Arabic diacritization (2.29% DER, 99.997% Quran)
 ---
 
 # Harakat - Arabic Diacritization
 
-**High-Accuracy Arabic Text Diacritization**
+**High-Accuracy Arabic Text Diacritization (Tashkeel)**
 
-- **2.13% DER** on Tashkeela benchmark
-- **6 MB** total model size
-- **73x smaller** than state-of-the-art
+![Demo](https://raw.githubusercontent.com/jeranaias/harakat/main/docs/demo.gif)
+
+## Performance
+
+| Metric | Value |
+|--------|-------|
+| Diacritic Error Rate (DER) | **2.29%** |
+| DER (without case endings) | **1.53%** |
+| Word Error Rate (WER) | **6.37%** |
+| Quran Accuracy | **99.997%** |
+| Model Size | **6.7 MB** |
+| vs SOTA | **62x smaller** |
+
+## Features
+
+- **Automatic Quran Detection**: Quranic phrases auto-detected with near-perfect accuracy
+- **Lightweight**: Single-file model, runs anywhere
+- **Production-Ready**: REST API with batch processing support
+- **Bilingual Interface**: English & Arabic UI
 
 ## Usage
 
-Paste any Arabic text and click Submit to add diacritical marks (tashkeel/harakat).
+Paste any Arabic text and click Submit to add diacritical marks.
+
+**Examples:**
+- `بسم الله الرحمن الرحيم` → `بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ`
+- `العلم نور والجهل ظلام` → `الْعِلْمُ نُورٌ وَالْجَهْلُ ظَلَامٌ`
 
 ## API
 
-Use Gradio's API format:
+### REST API (Recommended)
+
+```python
+import requests
+
+response = requests.post(
+    "https://jcmguy-harakat.hf.space/api/diacritize",
+    json={"text": "بسم الله الرحمن الرحيم"}
+)
+print(response.json()["output"])
+# بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+```
+
+### Gradio API
 
 ```javascript
 // Step 1: Submit request
@@ -41,7 +74,17 @@ const result = await fetch(`/call/predict/${event_id}`);
 // Returns: data: ["مَرْحَبًا بِالْعَالَمِ"]
 ```
 
+## API Documentation
+
+- **Swagger UI**: [/docs](https://jcmguy-harakat.hf.space/docs)
+- **ReDoc**: [/redoc](https://jcmguy-harakat.hf.space/redoc)
+
 ## Links
 
 - [GitHub Repository](https://github.com/jeranaias/harakat)
-- [Documentation](https://github.com/jeranaias/harakat#readme)
+- [Documentation](https://jeranaias.github.io/harakat)
+- [Google Colab](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)
+
+---
+
+**Author**: Jesse Morgan | **License**: MIT
