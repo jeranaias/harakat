@@ -2923,6 +2923,10 @@ def diacritize(text, apply_particles=True, apply_anna=True, apply_sunna=True,
     except Exception:
         pass
 
+    # Note: Neural correction layer was tested but caused regressions
+    # The lookup approach had issues with context-dependent patterns
+    # Sticking with verified WORD_OVERRIDES and SINGLE_WORD_FIXES
+
     return result
 
 
