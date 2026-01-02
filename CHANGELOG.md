@@ -84,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | DER | DER (no case) | WER | Size | Key Feature |
 |---------|-----|---------------|-----|------|-------------|
+| 3.5.1 | 2.29% | 1.53% | 6.37% | 6.7 MB | Docker, OpenAPI, proverb fix |
 | 3.5.0 | 2.29% | 1.53% | 6.37% | 6.7 MB | Quran mode |
 | 3.0.0 | 2.29% | 1.95% | 6.44% | ~6 MB | ML classifiers |
 | 2.0.0 | 2.29% | — | 6.44% | ~6 MB | Neural case |
@@ -115,6 +116,7 @@ No breaking changes. Neural case prediction is applied automatically.
 
 ---
 
+[3.5.1]: https://github.com/jeranaias/harakat/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/jeranaias/harakat/compare/v3.0.0...v3.5.0
 [3.0.0]: https://github.com/jeranaias/harakat/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/jeranaias/harakat/compare/v1.0.0...v2.0.0

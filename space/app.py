@@ -48,7 +48,7 @@ API_DESCRIPTION = """
 import requests
 
 response = requests.post(
-    "https://jeranaias-harakat.hf.space/api/diacritize",
+    "https://jcmguy-harakat.hf.space/api/diacritize",
     json={"text": "بسم الله الرحمن الرحيم"}
 )
 print(response.json()["output"])
@@ -57,14 +57,14 @@ print(response.json()["output"])
 
 ### cURL
 ```bash
-curl -X POST "https://jeranaias-harakat.hf.space/api/diacritize" \\
+curl -X POST "https://jcmguy-harakat.hf.space/api/diacritize" \\
      -H "Content-Type: application/json" \\
      -d '{"text": "العلم نور"}'
 ```
 
 ### JavaScript
 ```javascript
-const response = await fetch("https://jeranaias-harakat.hf.space/api/diacritize", {
+const response = await fetch("https://jcmguy-harakat.hf.space/api/diacritize", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text: "مرحبا بالعالم"})
