@@ -1434,6 +1434,12 @@ WORD_OVERRIDES = {
     ('جد', 'وجد'): 'جَدَّ',  # "strived" not "grandfather"
     ('وجد', 'ومن'): 'وَجَدَ',  # active "found" not passive "was found"
 
+    # Common news/business patterns - active voice
+    ('اطلقت', 'الشركة'): 'أَطْلَقَتِ',  # "the company launched" (not "was launched")
+    ('اعلنت', 'الشركة'): 'أَعْلَنَتِ',  # "the company announced"
+    ('طرحت', 'الشركة'): 'طَرَحَتِ',  # "the company released"
+    ('قدمت', 'الشركة'): 'قَدَّمَتِ',  # "the company presented"
+
     # Added from real_errors.txt analysis (Experiment 13)
     # Only patterns verified as 100% consistent (no gold variation)
     ('منتقى', '('): 'مُنْتَقًى',  # 3 fixes - tanween fatha
@@ -1452,7 +1458,45 @@ WORD_OVERRIDES = {
 
 # Legacy compatibility - kept for reference but not used in new approach
 WORD_CONTEXT_CORRECTIONS = {}
+
+# Single-word fixes: applied regardless of context
+# Maps undiacritized base -> correct diacritized form
+# These fix words that V2 consistently gets wrong
+SINGLE_WORD_FIXES = {
+    # Modern/technical terms
+    'الاصطناعي': 'الِاصْطِنَاعِيِّ',  # artificial (الذكاء الاصطناعي)
+    'اصطناعي': 'اصْطِنَاعِيٌّ',  # artificial (indefinite)
+    'الاصطناعية': 'الِاصْطِنَاعِيَّةِ',  # artificial (feminine)
+    'اصطناعية': 'اصْطِنَاعِيَّةٌ',  # artificial (feminine indefinite)
+}
+
+# Legacy - not used
 WORD_ONLY_CORRECTIONS = {}
+
+
+def apply_single_word_fixes(text):
+    """
+    Apply single-word fixes regardless of context.
+    These correct words that V2 consistently gets wrong.
+    """
+    if not SINGLE_WORD_FIXES:
+        return text
+
+    HARAKAT_SET = set('\u064B\u064C\u064D\u064E\u064F\u0650\u0651\u0652')
+    words = text.split()
+    result = []
+
+    for word in words:
+        # Get undiacritized base
+        base = ''.join(c for c in word if c not in HARAKAT_SET)
+
+        if base in SINGLE_WORD_FIXES:
+            result.append(SINGLE_WORD_FIXES[base])
+        else:
+            result.append(word)
+
+    return ' '.join(result)
+
 
 # =============================================================================
 # Voice Detection Rules (Experiment 1)
@@ -2872,6 +2916,12 @@ def diacritize(text, apply_particles=True, apply_anna=True, apply_sunna=True,
             result = apply_sunna_fix(result)
         except Exception:
             pass
+
+    # Step 7: Single-word fixes (context-independent)
+    try:
+        result = apply_single_word_fixes(result)
+    except Exception:
+        pass
 
     return result
 
