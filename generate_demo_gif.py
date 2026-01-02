@@ -119,7 +119,7 @@ def main():
     # Examples to show
     examples = [
         ("Basmala", "بسم الله الرحمن الرحيم", diacritize("بسم الله الرحمن الرحيم")),
-        ("Proverb", "العلم نور والجهل ظلام", diacritize("العلم نور والجهل ظلام")),
+        ("Proverb", "من جد وجد ومن زرع حصد", diacritize("من جد وجد ومن زرع حصد")),
         ("Education", "ذهب الطالب الى المدرسة", diacritize("ذهب الطالب الى المدرسة")),
     ]
 
