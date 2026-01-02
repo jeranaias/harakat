@@ -21,7 +21,7 @@ Author: Jesse Morgan
 License: MIT
 """
 
-__version__ = "3.5.0"
+__version__ = "3.5.1"
 __author__ = "Jesse Morgan"
 
 import sys

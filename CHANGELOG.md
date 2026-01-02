@@ -5,6 +5,19 @@ All notable changes to Harakat will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.1] - 2025-01-01
+
+### Added
+- Docker support with multi-stage build (`Dockerfile`, `docker-compose.yml`)
+- OpenAPI documentation with Swagger UI at `/docs` and ReDoc at `/redoc`
+- Batch diacritization API endpoint (`/api/diacritize/batch`)
+- Terminal demo script and GIF recording tools
+- CONTRIBUTING.md with contribution guidelines
+
+### Fixed
+- Famous proverb "من جد وجد ومن زرع حصد" now correctly diacritized
+- Fixed من/مَنْ (who) vs مِنْ (from) disambiguation in proverb context
+
 ## [3.5.0] - 2024-12-29
 
 ### Added
