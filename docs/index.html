@@ -597,9 +597,14 @@
             font-weight: 600;
         }
 
+        .showcase-output.placeholder,
         .showcase-output.loading {
-            color: var(--gray);
+            font-family: 'Inter', sans-serif;
             font-style: italic;
+            font-weight: 400;
+            color: var(--gray);
+            direction: ltr;
+            text-align: center;
         }
 
         /* Code Integration Section */
@@ -1107,7 +1112,7 @@
                             <div class="showcase-demo-content">
                                 <textarea class="showcase-input" id="edu-input" rows="2">الطالب يقرا الكتاب في المكتبة</textarea>
                                 <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output" id="edu-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <div class="showcase-output placeholder" id="edu-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
                             </div>
                         </div>
                     </div>
@@ -1134,7 +1139,7 @@
                             <div class="showcase-demo-content">
                                 <textarea class="showcase-input" id="religious-input" rows="2">قل هو الله احد الله الصمد</textarea>
                                 <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output" id="religious-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <div class="showcase-output placeholder" id="religious-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
                             </div>
                         </div>
                     </div>
@@ -1161,7 +1166,7 @@
                             <div class="showcase-demo-content">
                                 <textarea class="showcase-input" id="tts-input" rows="2">مرحبا بكم في تطبيقنا الجديد</textarea>
                                 <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output" id="tts-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <div class="showcase-output placeholder" id="tts-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
                             </div>
                         </div>
                     </div>
@@ -1188,7 +1193,7 @@
                             <div class="showcase-demo-content">
                                 <textarea class="showcase-input" id="pub-input" rows="2">اعلنت الحكومة عن خطة جديدة لتطوير التعليم</textarea>
                                 <div class="showcase-arrow">↓</div>
-                                <div class="showcase-output" id="pub-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
+                                <div class="showcase-output placeholder" id="pub-output"><span class="en-inline">Click "Run" to diacritize</span><span class="ar-inline">اضغط "تشغيل" للتشكيل</span></div>
                             </div>
                         </div>
                     </div>
@@ -1413,6 +1418,7 @@ $ python harakat.py --file input.txt --output diacritized.txt</pre>
             if (!input) return;
 
             output.textContent = t('diacritizing');
+            output.classList.remove('placeholder');
             output.classList.add('loading');
 
             try {
