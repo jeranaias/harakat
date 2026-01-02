@@ -39,6 +39,7 @@ def get_fonts():
 
     mono_font = None
     arabic_font = None
+    cmd_arabic_font = None
 
     for path in mono_paths:
         try:
@@ -50,6 +51,7 @@ def get_fonts():
     for path in arabic_paths:
         try:
             arabic_font = ImageFont.truetype(path, 20)
+            cmd_arabic_font = ImageFont.truetype(path, 14)  # Smaller for command line
             break
         except:
             pass
@@ -58,10 +60,12 @@ def get_fonts():
         mono_font = ImageFont.load_default()
     if arabic_font is None:
         arabic_font = ImageFont.load_default()
+    if cmd_arabic_font is None:
+        cmd_arabic_font = ImageFont.load_default()
 
-    return mono_font, arabic_font
+    return mono_font, arabic_font, cmd_arabic_font
 
-def create_frame(examples, current_example, show_output, mono_font, arabic_font):
+def create_frame(examples, current_example, show_output, mono_font, arabic_font, cmd_arabic_font):
     """Create a single frame of the animation"""
     img = Image.new('RGB', (WIDTH, HEIGHT), BG_COLOR)
     draw = ImageDraw.Draw(img)
@@ -84,9 +88,19 @@ def create_frame(examples, current_example, show_output, mono_font, arabic_font)
         if i > current_example:
             break
 
-        # Prompt and command
+        # Prompt and command - split into parts to use proper fonts
         draw.text((20, y), "$", font=mono_font, fill=PROMPT_COLOR)
-        draw.text((35, y), f'python harakat.py "{arabic}"', font=mono_font, fill=COMMAND_COLOR)
+        cmd_prefix = 'python harakat.py "'
+        draw.text((35, y), cmd_prefix, font=mono_font, fill=COMMAND_COLOR)
+        # Calculate width of prefix to position Arabic text
+        prefix_bbox = draw.textbbox((0, 0), cmd_prefix, font=mono_font)
+        prefix_width = prefix_bbox[2] - prefix_bbox[0]
+        # Draw Arabic with proper font
+        draw.text((35 + prefix_width, y), arabic, font=cmd_arabic_font, fill=COMMAND_COLOR)
+        # Calculate Arabic width and add closing quote
+        arabic_bbox = draw.textbbox((0, 0), arabic, font=cmd_arabic_font)
+        arabic_width = arabic_bbox[2] - arabic_bbox[0]
+        draw.text((35 + prefix_width + arabic_width, y), '"', font=mono_font, fill=COMMAND_COLOR)
         y += 25
 
         if i < current_example or (i == current_example and show_output):
@@ -114,7 +128,7 @@ def create_frame(examples, current_example, show_output, mono_font, arabic_font)
 def main():
     print("Generating demo GIF...")
 
-    mono_font, arabic_font = get_fonts()
+    mono_font, arabic_font, cmd_arabic_font = get_fonts()
 
     # Examples to show
     examples = [
@@ -127,21 +141,21 @@ def main():
     durations = []
 
     # Initial blank frame
-    frames.append(create_frame(examples, -1, False, mono_font, arabic_font))
+    frames.append(create_frame(examples, -1, False, mono_font, arabic_font, cmd_arabic_font))
     durations.append(500)
 
     # Animate each example
     for i in range(len(examples)):
         # Show command
-        frames.append(create_frame(examples, i, False, mono_font, arabic_font))
+        frames.append(create_frame(examples, i, False, mono_font, arabic_font, cmd_arabic_font))
         durations.append(800)
 
         # Show output
-        frames.append(create_frame(examples, i, True, mono_font, arabic_font))
+        frames.append(create_frame(examples, i, True, mono_font, arabic_font, cmd_arabic_font))
         durations.append(1500)
 
     # Final pause
-    frames.append(create_frame(examples, len(examples) - 1, True, mono_font, arabic_font))
+    frames.append(create_frame(examples, len(examples) - 1, True, mono_font, arabic_font, cmd_arabic_font))
     durations.append(2000)
 
     # Save as GIF
