@@ -1,22 +1,31 @@
-# Harakat
+<h1 align="center">حَرَكَاتْ</h1>
+<h3 align="center">Harakat — High-Accuracy Arabic Diacritization</h3>
+<p align="center"><strong>2.29% DER | 99.997% Quran Accuracy | 6.7 MB | 62x Smaller than SOTA</strong></p>
 
-**High-Accuracy Arabic Diacritization — 2.29% DER | 99.997% Quran Accuracy**
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python 3.8+"></a>
+  <a href="https://github.com/jeranaias/harakat/actions/workflows/ci.yml"><img src="https://github.com/jeranaias/harakat/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![CI](https://github.com/jeranaias/harakat/actions/workflows/ci.yml/badge.svg)](https://github.com/jeranaias/harakat/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/jeranaias/harakat/branch/main/graph/badge.svg)](https://codecov.io/gh/jeranaias/harakat)
+<p align="center">
+  <img src="https://img.shields.io/badge/DER-2.29%25-brightgreen.svg" alt="DER: 2.29%">
+  <img src="https://img.shields.io/badge/Quran-99.997%25-gold.svg" alt="Quran: 99.997%">
+  <img src="https://img.shields.io/badge/Size-6.7MB-blue.svg" alt="Model Size">
+  <img src="https://img.shields.io/badge/vs_SOTA-62x_smaller-blueviolet.svg" alt="62x Smaller">
+</p>
 
-[![DER: 2.29%](https://img.shields.io/badge/DER-2.29%25-brightgreen.svg)]()
-[![Quran: 99.997%](https://img.shields.io/badge/Quran-99.997%25-gold.svg)]()
-[![Model Size](https://img.shields.io/badge/Size-6.7MB-blue.svg)]()
-[![62x Smaller](https://img.shields.io/badge/vs_SOTA-62x_smaller-blueviolet.svg)]()
+<p align="center">
+  <a href="https://jeranaias.github.io/harakat/"><img src="https://img.shields.io/badge/Demo-Live-success.svg" alt="Live Demo"></a>
+  <a href="https://huggingface.co/spaces/jcmguy/harakat"><img src="https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace_Space-orange.svg" alt="HuggingFace Space"></a>
+  <a href="https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+</p>
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live-success.svg)](https://jeranaias.github.io/harakat/)
-[![HuggingFace Space](https://img.shields.io/badge/%F0%9F%A4%97-HuggingFace_Space-orange.svg)](https://huggingface.co/spaces/jcmguy/harakat)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)
-
-> **[Try the Live Demo](https://jeranaias.github.io/harakat/)** | **[HuggingFace Space](https://huggingface.co/spaces/jcmguy/harakat)** | **[Run in Colab](https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb)**
+<p align="center">
+  <strong><a href="https://jeranaias.github.io/harakat/">Try the Live Demo</a></strong> ·
+  <strong><a href="https://huggingface.co/spaces/jcmguy/harakat">HuggingFace Space</a></strong> ·
+  <strong><a href="https://colab.research.google.com/github/jeranaias/harakat/blob/main/examples/harakat_demo.ipynb">Run in Colab</a></strong>
+</p>
 
 <p align="center">
   <img src="docs/demo.gif" alt="Harakat Demo" width="700">
@@ -1742,7 +1751,7 @@ pip install -r requirements.txt
 
 # Verify
 python harakat.py --version
-# Output: Harakat 3.5.0
+# Output: Harakat 3.5.1
 ```
 
 #### Option 2: Single-File Download
@@ -1771,7 +1780,7 @@ pip install harakat  # Not yet available on PyPI
 ```bash
 # Check version
 python harakat.py --version
-# Output: Harakat 3.5.0
+# Output: Harakat 3.5.1
 
 # Quick test
 python harakat.py "ذهب الولد إلى المدرسة"
