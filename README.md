@@ -22,6 +22,29 @@
   <img src="docs/demo.gif" alt="Harakat Demo" width="700">
 </p>
 
+## Quick Start
+
+```bash
+# Clone and install
+git clone https://github.com/jeranaias/harakat.git
+cd harakat && pip install -r requirements.txt
+
+# Diacritize text
+python harakat.py "السلام عليكم"
+# Output: السَّلَامُ عَلَيْكُمْ
+```
+
+```python
+# Python API
+from harakat import diacritize
+
+print(diacritize("بسم الله الرحمن الرحيم"))
+# بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+
+print(diacritize("من جد وجد ومن زرع حصد"))
+# مَنْ جَدَّ وَجَدَ وَمَنْ زَرَعَ حَصَدَ
+```
+
 ---
 
 Harakat is a lightweight, offline-capable Arabic diacritization engine that achieves state-of-the-art accuracy while remaining small enough to run on any device. Built from scratch by a single developer, it demonstrates that careful engineering and novel methodologies can compete with billion-parameter models at a fraction of the size.
