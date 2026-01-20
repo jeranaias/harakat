@@ -506,6 +506,8 @@ class HybridCorrector:
         _, v1_internal = self._extract_internal(word)
         if len(v1_internal) == 0:
             return word
+        # Truncate to model's max capacity (19 internal positions, since output is seq_len-1)
+        v1_internal = v1_internal[:19]
         word_enc = torch.tensor([self._encode_word(base)], device=self.device)
         v1_diacs = [DIAC_TO_IDX.get(d, 0) for d in v1_internal] + [0] * (20 - len(v1_internal))
         v1_diacs_enc = torch.tensor([v1_diacs], device=self.device)
